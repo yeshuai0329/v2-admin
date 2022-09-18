@@ -3,18 +3,17 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <a-button> 1下载 </a-button>
+    <a-input></a-input>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import { Button } from 'ant-design-vue'  
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    "a-button": Button
   }
 }
 </script>
