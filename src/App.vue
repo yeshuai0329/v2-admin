@@ -2,21 +2,24 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <a-button> 1下载 </a-button>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import { Button } from 'ant-design-vue'  
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    "a-button": Button
   }
 }
 </script>
 
-<style>
+<style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
