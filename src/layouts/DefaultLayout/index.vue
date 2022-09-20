@@ -1,22 +1,30 @@
 <template>
+  <a-layout>
+    <LayoutSider />
     <a-layout>
-      <a-layout-sider>Sider</a-layout-sider>
-      <a-layout>
-        <a-layout-header>Header</a-layout-header>
-        <a-layout-content>Content</a-layout-content>
-      </a-layout>
+      <LayoutHeader />
+      <LayoutContent />
     </a-layout>
+  </a-layout>
 </template>
 
 <script>
-export default {
-  name: 'DefaultLayout'
+import LayoutHeader from "@/layouts/LayoutHeader";
+import LayoutSider from "@/layouts/LayoutSider";
+import LayoutContent from "@/layouts/LayoutContent";
 
-}
+export default {
+  name: "DefaultLayout",
+  components: {
+    LayoutHeader,
+    LayoutSider,
+    LayoutContent,
+  },
+};
 </script>
 
 <style lang="less" scoped>
-  .ant-layout {
-    height: 100%;
-  }
+.ant-layout {
+  height: 100%;
+}
 </style>
