@@ -10,8 +10,6 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import enUS from 'ant-design-vue/lib/locale-provider/en_US';
-
 export default {
   name: 'App',
   components: {
@@ -19,7 +17,6 @@ export default {
   },
   data: function() {
     return {
-      locale: enUS
     }
   }
 }
