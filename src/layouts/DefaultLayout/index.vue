@@ -9,18 +9,18 @@
 </template>
 
 <script>
-import LayoutHeader from "@/layouts/LayoutHeader";
-import LayoutSider from "@/layouts/LayoutSider";
-import LayoutContent from "@/layouts/LayoutContent";
+import LayoutHeader from '@/layouts/LayoutHeader'
+import LayoutSider from '@/layouts/LayoutSider'
+import LayoutContent from '@/layouts/LayoutContent'
 
 export default {
-  name: "DefaultLayout",
+  name: 'DefaultLayout',
   components: {
     LayoutHeader,
     LayoutSider,
-    LayoutContent,
-  },
-};
+    LayoutContent
+  }
+}
 </script>
 
 <style lang="less" scoped>

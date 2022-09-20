@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: "LayoutContent",
-};
+  name: 'LayoutContent'
+}
 </script>
 
 <style lang='less' scoped>

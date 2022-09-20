@@ -8,5 +8,5 @@ Vue.config.productionTip = false
 Vue.use(AntDesignVue)
 
 new Vue({
-  render: h => h(GlobalProviders),
+  render: h => h(GlobalProviders)
 }).$mount('#app')

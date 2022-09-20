@@ -9,8 +9,8 @@
 
 <script>
 export default {
-  name: "SiderMenu",
-};
+  name: 'SiderMenu'
+}
 </script>
 
 <style lang='less' scoped>

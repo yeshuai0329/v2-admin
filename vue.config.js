@@ -8,7 +8,7 @@ module.exports = defineConfig({
         javascriptEnabled: true,
         modifyVars: {
           // 'primary-color': '#007ac3',// 全局主色
-        },
+        }
       }
     }
   }

@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import SiderMenu from "@/components/SiderMenu";
+import SiderMenu from '@/components/SiderMenu'
 export default {
-  name: "LayoutSider",
+  name: 'LayoutSider',
   components: {
-    SiderMenu,
-  },
-};
+    SiderMenu
+  }
+}
 </script>
 
 <style lang='less' scoped>
