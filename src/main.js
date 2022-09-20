@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import AntDesignVue from '@/AntDesignVue'
-import GlobalProviders from '@/components/globalProviders'
+import GlobalProviders from '@/components/GlobalProviders'
 import '@/styles/reset.less'
 
 Vue.config.productionTip = false

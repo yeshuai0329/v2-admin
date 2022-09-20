@@ -1,9 +1,14 @@
-import { Button, Input, message, Modal, ConfigProvider } from 'ant-design-vue'
+import { Button, Input, message, Modal, ConfigProvider, Layout } from 'ant-design-vue'
+const { Sider, Header, Content } = Layout
 
 const GlobalComponents = [
   Button,
   Input,
-  ConfigProvider
+  ConfigProvider,
+  Layout,
+  Sider,
+  Header,
+  Content
 ]
 
 export default (Vue) => {
