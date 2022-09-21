@@ -1,6 +1,9 @@
-import { Button, Input, message, Modal, ConfigProvider, Layout, Menu } from 'ant-design-vue'
+import { Button, Input, message, Modal, ConfigProvider, Layout, Menu, Row, Col, Tabs, Form, FormModel } from 'ant-design-vue'
 const { Sider, Header, Content } = Layout
 const { SubMenu, Item, ItemGroup } = Menu
+const { TabPane } = Tabs
+const { Password } = Input
+
 const GlobalComponents = [
   Button,
   Input,
@@ -12,7 +15,14 @@ const GlobalComponents = [
   Menu,
   SubMenu,
   Item,
-  ItemGroup
+  ItemGroup,
+  Row,
+  Col,
+  Tabs,
+  TabPane,
+  Form,
+  FormModel,
+  Password
 ]
 
 export default (Vue) => {
@@ -20,6 +30,7 @@ export default (Vue) => {
   Vue.prototype.$message = message
   // 全局注册 Modal 组件
   Vue.use(Modal)
+  Vue.component(FormModel.Item.name, FormModel.Item)
   // 注册常用全局组件
   GlobalComponents.forEach((component) => {
     Vue.component(component.name, component)

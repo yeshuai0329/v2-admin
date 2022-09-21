@@ -1,33 +1,53 @@
 <template>
-  <div>
-    登录页面
-    <router-link to="/home">去home</router-link>
-    <a-button @click="login">登录</a-button>
-    <a-button @click="gohome">去home</a-button>
-    <a-button @click="gocode">去响应状态吗</a-button>
+  <div class="login">
+    <div class="content">
+      <a-row>
+        <a-col :span="14">
+          <login-model></login-model>
+        </a-col>
+        <a-col :span="10">
+          <img src="@/assets/login.jpeg" alt="" class="login-content-center-bgImg">
+        </a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 
 <script>
+import LoginModel from '@/views/Login/components/LoginModel'
 export default {
   name: 'Login',
-  methods: {
-    login () {
-      localStorage.setItem('v2tocken', 11111)
-      this.gohome()
-    },
-    gohome () {
-      localStorage.setItem('v2tocken', 11111)
-      this.$router.push('/home')
-    },
-    gocode () {
-      localStorage.setItem('v2tocken', 11111)
-      this.$router.push('/serverconfig/respcode')
-    }
+  components: {
+    LoginModel
   }
 }
 </script>
 
 <style lang='less' scoped>
-
+  .login {
+    width: 100%;
+    height: 100%;
+    background-color:#73a2f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content {
+      min-width: 800px;
+      max-width: 800px;
+      height: 500px;
+      background-color: aliceblue;
+      border-radius: 8px;
+      overflow: hidden;
+      .ant-row {
+        height: 100%;
+      }
+      .ant-col {
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
 </style>
