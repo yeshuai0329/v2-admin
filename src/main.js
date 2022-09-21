@@ -4,6 +4,7 @@ import GlobalProviders from '@/components/GlobalProviders'
 import router from '@/router/router'
 import '@/styles/reset.less'
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV)
 Vue.config.productionTip = false
 // 引入全局注册的 ant-design-vue 的组件
 Vue.use(AntDesignVue)
