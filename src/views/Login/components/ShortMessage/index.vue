@@ -1,5 +1,7 @@
 <template>
   <div class='ShortMessage' >
+    <h1>v2-admin-antdv</h1>
+    <h5>基于 vue2\antdv 搭建的admin管理系统</h5>
     <div class="inputModel">
       <div >
         <label>手机号</label><a-input v-model="userInfo.phoneNumber"/>
@@ -35,8 +37,16 @@ export default {
 
 <style lang='less' scoped>
   .ShortMessage {
-    padding: 24px 24px 24px 24px;
+    padding: 0px 24px 24px 24px;
     height: 100%;
+    h1 {
+      text-align: center;
+      font-size: 24px;
+    }
+    h5 {
+      text-align: center;
+      color: #ccc;
+    }
     .inputModel {
       border-radius: 8px;
       margin-bottom: 24px;

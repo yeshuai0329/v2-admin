@@ -1,30 +1,72 @@
 <template>
   <div class='PassWord' >
+    <h1>v2-admin-antdv</h1>
+    <h5>基于 vue2\antdv 搭建的admin管理系统</h5>
     <div class="inputModel">
       <div >
-        <label>账号</label><a-input v-model="userInfo.accountNumber"/>
+        <label>账号</label><a-input v-model.trim="userInfo.accountNumber"/>
       </div>
        <div>
-        <label>密码</label><a-input-password  v-model="userInfo.passWord" visibilityToggle/>
+        <label>密码</label><a-input-password  v-model.trim="userInfo.passWord" visibilityToggle/>
       </div>
     </div>
     <div class='buttonGroup'>
       <a-row :gutter="[24,24]">
-        <a-col :span="12"><a-button size="large" block>注册</a-button></a-col>
-        <a-col :span="12"><a-button  size="large" type="primary" block>登录</a-button></a-col>
+        <a-col :span="12">
+          <a-button size="large" block @click="userRegist">注册</a-button>
+        </a-col>
+        <a-col :span="12">
+          <a-button
+            size="large"
+            type="primary"
+            block
+            @click="userLogin"
+            :loading="loginLoading"
+          >
+            登录
+          </a-button>
+          </a-col>
       </a-row>
     </div>
   </div>
 </template>
 
 <script>
+import { loginApi, regestApi } from '@/apis/Login'
 export default {
   name: 'PassWord',
   data: function () {
     return {
       userInfo: {
-        accountNumber: '',
-        passWord: ''
+        accountNumber: 'yeshuai0329@aliyun.com',
+        passWord: '123456',
+        loginType: '1'
+      },
+      loginLoading: false,
+      registLoading: false
+    }
+  },
+  methods: {
+    async userLogin  () {
+      if (!this.userInfo.accountNumber || !this.userInfo.passWord) {
+        this.$message.error('请输入账号或密码!')
+      } else {
+        this.loginLoading = true
+        const data = await loginApi(this.userInfo)
+        this.loginLoading = false
+        console.log('data', data)
+      }
+    },
+    async userRegist  () {
+      if (!this.userInfo.accountNumber || !this.userInfo.passWord) {
+        this.$message.error('请输入账号或密码!')
+      } else {
+        this.registLoading = true
+        const { data } = await regestApi(this.userInfo)
+        this.registLoading = false
+        if (data.code === 200) {
+          this.$message.success('账号注册成功!')
+        }
       }
     }
   }
@@ -33,8 +75,16 @@ export default {
 
 <style lang='less' scoped>
   .PassWord {
-    padding: 24px 24px 24px 24px;
+    padding: 0px 24px 24px 24px;
     height: 100%;
+    h1 {
+      text-align: center;
+      font-size: 24px;
+    }
+    h5 {
+      text-align: center;
+      color: #ccc;
+    }
     .inputModel {
       border-radius: 8px;
       margin-bottom: 24px;
