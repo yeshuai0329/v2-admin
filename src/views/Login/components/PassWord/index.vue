@@ -52,6 +52,7 @@ export default {
         this.$message.error('请输入账号或密码!')
       } else {
         this.loginLoading = true
+        console.log('this.userInfo', this.userInfo)
         const data = await loginApi(this.userInfo)
         this.loginLoading = false
         console.log('data', data)
