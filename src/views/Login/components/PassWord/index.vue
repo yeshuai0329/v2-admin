@@ -27,13 +27,15 @@
           </a-button>
           </a-col>
       </a-row>
+      <a-button @click="getMenusInfo">获取菜单</a-button>
     </div>
   </div>
 </template>
 
 <script>
 import { loginApi, regestApi } from '@/apis/Login'
-import { mapMutations } from 'vuex'
+import { getMenusInfoApi } from '@/apis/Auth'
+import { mapActions } from 'vuex'
 export default {
   name: 'PassWord',
   data: function () {
@@ -48,7 +50,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('user', ['userInfoAction']),
+    ...mapActions('user', ['userInfoAction']),
     async userLogin  () {
       if (!this.userInfo.accountNumber || !this.userInfo.passWord) {
         this.$message.error('请输入账号或密码!')
@@ -59,7 +61,10 @@ export default {
         this.loginLoading = false
         if (data.code === 200) {
           this.userInfoAction(data.data)
+          localStorage.setItem('token', data.data.token)
+          localStorage.setItem('refreshtoken', data.data.refreshtoken)
           this.$message.success('账号登录成功!')
+          // this.$router.push('/home')
         }
       }
     },
@@ -74,6 +79,9 @@ export default {
           this.$message.success('账号注册成功!')
         }
       }
+    },
+    async getMenusInfo () {
+      getMenusInfoApi()
     }
   }
 }

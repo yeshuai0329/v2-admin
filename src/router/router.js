@@ -30,10 +30,9 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     next()
   } else {
-    const v2tocken = localStorage.getItem('v2tocken')
-    console.log('v2tocken', v2tocken)
-    if (!v2tocken) {
-      router.push('login')
+    const token = localStorage.getItem('token')
+    if (!token) {
+      router.push('/login')
     } else {
       next()
     }

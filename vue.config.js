@@ -13,14 +13,14 @@ module.exports = defineConfig({
     }
   },
   devServer: {
-    proxy: {
-      '/v1': {
-        target: 'http://localhost:8090',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/v1': ''
-        }
-      }
-    }
+    // proxy: {
+    //   '/v1': {
+    //     target: 'http://localhost:8090',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/v1': ''
+    //     }
+    //   }
+    // }
   }
 })

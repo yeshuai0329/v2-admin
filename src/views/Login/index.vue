@@ -25,7 +25,7 @@ export default {
 
 <style lang='less' scoped>
   .login {
-    width: 100%;
+    min-width: 800px;
     height: 100%;
     background-color:#73a2f3;
     display: flex;
