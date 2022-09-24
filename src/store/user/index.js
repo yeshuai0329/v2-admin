@@ -12,7 +12,10 @@ const state = {
  * @description:  响应组件中用户的动作
  */
 const actions = {
-
+  userInfoAction: (context, value) => {
+    console.log('context', context)
+    console.log('value', value)
+  }
 }
 
 /**

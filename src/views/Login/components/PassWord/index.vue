@@ -33,6 +33,7 @@
 
 <script>
 import { loginApi, regestApi } from '@/apis/Login'
+import { mapMutations } from 'vuex'
 export default {
   name: 'PassWord',
   data: function () {
@@ -47,15 +48,19 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('user', ['userInfoAction']),
     async userLogin  () {
       if (!this.userInfo.accountNumber || !this.userInfo.passWord) {
         this.$message.error('请输入账号或密码!')
       } else {
         this.loginLoading = true
-        console.log('this.userInfo', this.userInfo)
-        const data = await loginApi(this.userInfo)
-        this.loginLoading = false
+        const { data } = await loginApi(this.userInfo)
         console.log('data', data)
+        this.loginLoading = false
+        if (data.code === 200) {
+          this.userInfoAction(data.data)
+          this.$message.success('账号登录成功!')
+        }
       }
     },
     async userRegist  () {

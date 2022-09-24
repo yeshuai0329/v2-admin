@@ -23,14 +23,10 @@ export default {
     }
   },
   computed: {
-    activeComponet () {
-      const componentMap = this.LOGIN_TYPE_MAP.find((item) => item.key === this.activeKey)
-      return componentMap.component
-    }
+
   },
   methods: {
     tabsChange (activeKey) {
-      console.log('activeKey', activeKey)
       this.activeKey = activeKey
     }
   }
