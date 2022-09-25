@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
-console.log('store', store)
 const DefaultLayout = () => import(/* webpackChunkName: "DefaultLayout" */'@/layouts/DefaultLayout')
 const Login = () => import(/* webpackChunkName: "Login" */'@/views/Login')
 

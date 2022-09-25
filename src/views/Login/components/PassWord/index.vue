@@ -37,6 +37,7 @@ import { loginApi, regestApi } from '@/apis/Login'
 import { getMenusInfoApi } from '@/apis/Auth'
 import { mapActions } from 'vuex'
 import { initDynamicRoutes } from '@/router/router'
+import { authRoutesToAuthMenus } from '@/utils/public'
 export default {
   name: 'PassWord',
   data: function () {
@@ -84,10 +85,9 @@ export default {
       const { data } = await getMenusInfoApi()
       if (data.code === 200) {
         this.authRoutesListAction(data.data)
-        // data.data[0] && data.data[0].children && this.authMenusListAction(data.data[0].children)
-        // const dynamicRouters = userDynamicRouters(data.data)
-        // console.log('dynamicRouters', dynamicRouters)
         initDynamicRoutes()
+        const authMenusList = authRoutesToAuthMenus(data.data, [], 1)
+        this.authMenusListAction(authMenusList)
         this.$router.push('/home')
         this.$message.success('账号登录成功!')
       }
