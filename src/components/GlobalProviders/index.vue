@@ -8,9 +8,13 @@
 
 <script>
 import enUS from 'ant-design-vue/lib/locale-provider/en_US'
+import { initDynamicRoutes } from '@/router/router'
 export default {
   name: 'GlobalProviders',
   components: {
+  },
+  mounted () {
+    initDynamicRoutes()
   },
   data () {
     return {

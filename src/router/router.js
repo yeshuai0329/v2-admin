@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-const Login = () => import('@/views/Login')
+import store from '@/store'
+console.log('store', store)
+const DefaultLayout = () => import(/* webpackChunkName: "DefaultLayout" */'@/layouts/DefaultLayout')
+const Login = () => import(/* webpackChunkName: "Login" */'@/views/Login')
 
 Vue.use(VueRouter)
 
@@ -9,9 +12,8 @@ const ctx = require.context('./', true, /index\.[tj]s/)
 const routesMap = ctx.keys().reduce((routes, nextPath) => {
   const nextRoutes = ctx(nextPath).default
   return Object.assign(routes, nextRoutes)
-}, {})
+}, { defaultlayout: DefaultLayout })
 
-console.log('routesMap', routesMap)
 // 基础路由页面
 const baseRoutes = [
   {
@@ -25,6 +27,30 @@ const router = new VueRouter({
   routes: baseRoutes
 })
 
+export const initDynamicRoutes = () => {
+  const authRoutesList = store.state.user.authRoutesList
+  authRoutesList.forEach(item => {
+    const component = item.component?.toLowerCase()
+    const temp = {
+      path: item.path,
+      name: item.name,
+      component: routesMap[component],
+      redirect: item.redirect,
+      meta: {
+        title: item.menuName
+      },
+      children: []
+    }
+    if (!temp.component) delete temp.component
+    if (!temp.redirect) delete temp.redirect
+    if (item.parentName) {
+      router.addRoute(item.parentName, temp)
+    } else {
+      router.addRoute(temp)
+    }
+  })
+}
+
 router.beforeEach((to, from, next) => {
   // 如果是去login 页面,放行
   if (to.path === '/login') {
@@ -37,8 +63,6 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }
-  // 如果是去其他页面,校验是否登录
-  next()
 })
 
 export default router

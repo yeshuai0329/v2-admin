@@ -36,6 +36,7 @@
 import { loginApi, regestApi } from '@/apis/Login'
 import { getMenusInfoApi } from '@/apis/Auth'
 import { mapActions } from 'vuex'
+import { initDynamicRoutes } from '@/router/router'
 export default {
   name: 'PassWord',
   data: function () {
@@ -50,21 +51,19 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', ['userInfoAction']),
+    ...mapActions('user', ['userInfoAction', 'authRoutesListAction', 'authMenusListAction']),
     async userLogin  () {
       if (!this.userInfo.accountNumber || !this.userInfo.passWord) {
         this.$message.error('请输入账号或密码!')
       } else {
         this.loginLoading = true
         const { data } = await loginApi(this.userInfo)
-        console.log('data', data)
         this.loginLoading = false
         if (data.code === 200) {
           this.userInfoAction(data.data)
           localStorage.setItem('token', data.data.token)
           localStorage.setItem('refreshtoken', data.data.refreshtoken)
-          this.$message.success('账号登录成功!')
-          // this.$router.push('/home')
+          this.getMenusInfo()
         }
       }
     },
@@ -80,8 +79,18 @@ export default {
         }
       }
     },
+    // 获取菜单列表
     async getMenusInfo () {
-      getMenusInfoApi()
+      const { data } = await getMenusInfoApi()
+      if (data.code === 200) {
+        this.authRoutesListAction(data.data)
+        // data.data[0] && data.data[0].children && this.authMenusListAction(data.data[0].children)
+        // const dynamicRouters = userDynamicRouters(data.data)
+        // console.log('dynamicRouters', dynamicRouters)
+        initDynamicRoutes()
+        this.$router.push('/home')
+        this.$message.success('账号登录成功!')
+      }
     }
   }
 }
