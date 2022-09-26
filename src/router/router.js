@@ -26,6 +26,7 @@ const router = new VueRouter({
   routes: baseRoutes
 })
 
+// 初始化路由信息
 export const initDynamicRoutes = () => {
   const authRoutesList = store.state.user.authRoutesList
   authRoutesList.forEach(item => {
@@ -50,6 +51,7 @@ export const initDynamicRoutes = () => {
   })
 }
 
+// 判断用户是否登录
 router.beforeEach((to, from, next) => {
   // 如果是去login 页面,放行
   if (to.path === '/login') {
@@ -63,5 +65,11 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
+
+// 解决菜单重复点击控制台报错
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (to) {
+  return VueRouterPush.call(this, to).catch(err => err)
+}
 
 export default router
