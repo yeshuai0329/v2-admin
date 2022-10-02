@@ -1,5 +1,9 @@
 <template>
-  <a-layout-header> head </a-layout-header>
+  <a-layout-header
+    class="LayoutHeader"
+  >
+  <div>12312</div>
+  </a-layout-header>
 </template>
 
 <script>
@@ -9,4 +13,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.LayoutHeader {
+  background-color: #FFF;
+}
 </style>

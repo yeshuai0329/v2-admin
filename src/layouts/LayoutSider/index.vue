@@ -1,6 +1,6 @@
 <template>
   <a-layout-sider>
-    <sider-menu />
+    <sider-menu/>
   </a-layout-sider>
 </template>
 
@@ -12,10 +12,5 @@ export default {
   components: {
     SiderMenu
   }
-
 }
 </script>
-
-<style lang='less' scoped>
-
-</style>
