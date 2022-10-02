@@ -13,3 +13,38 @@ export const authRoutesToAuthMenus = (authRoutes, authMenus = [], menuParentId) 
   }
   return authMenus
 }
+
+/**
+ * @description 查找默认展开的path的集合
+ * @param {*} authMenusList
+ * @param {*} fullPath
+ * @param {*} openKeys
+ */
+export const findOpenkeys = (authMenusList, fullPath, openKeys = []) => {
+  for (const node of authMenusList) {
+    if (node.fullPath === fullPath) {
+      return openKeys
+    }
+    if (node.children && node.children.length) {
+      return findOpenkeys(node.children, fullPath, [...openKeys, node.path])
+    }
+  }
+}
+
+/**
+ *
+ * @description 查找选中的keys
+ * @param {*} authMenusList
+ * @param {*} fullPath
+ * @returns
+ */
+export const findSelectKeys = (authMenusList, fullPath) => {
+  for (const node of authMenusList) {
+    if (node.fullPath === fullPath) {
+      return [node.path]
+    }
+    if (node.children && node.children.length) {
+      return findSelectKeys(node.children, fullPath)
+    }
+  }
+}

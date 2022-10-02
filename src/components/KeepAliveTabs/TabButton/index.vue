@@ -1,11 +1,15 @@
 <template>
-  <div :class="['TabButton', {'active-button': mode.component === componentName}]" @click="toggleComponent(mode)">
+  <div
+    :class="['TabButton', {'active-button': mode.name === currentComponent.name}]"
+    @click="toggleComponent(mode)"
+  >
     {{mode.menuName}}
-    <a-icon type="close" @click="deleteComponent(mode)"/>
+    <a-icon v-if="mode.component!=='Home'" type="close" @click="deleteComponent(mode)"/>
   </div>
 </template>
 
 <script>
+import { findOpenkeys, findSelectKeys } from '@/utils/public'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'TabButton',
@@ -16,17 +20,21 @@ export default {
     }
   },
   computed: {
-    ...mapState('config', ['componentName'])
+    ...mapState('config', ['currentComponent']),
+    ...mapState('user', ['authMenusList'])
   },
   methods: {
-    ...mapActions('config', ['setComponentNameAction', 'setKeepAliveComponentNameListAction']),
+    ...mapActions('config', ['setCurrentComponentAction', 'setKeepAliveComponentListAction', 'setOpenKeysAction', 'setSelectedKeysAction']),
     toggleComponent (mode) {
-      console.log('mode', mode)
-      this.setComponentNameAction(mode.component)
+      this.setCurrentComponentAction(mode)
       this.$router.push(mode.fullPath)
+      const openKeys = findOpenkeys(this.authMenusList, this.$route.path, [])
+      const selectedKeys = findSelectKeys(this.authMenusList, this.$route.path)
+      this.setOpenKeysAction(openKeys)
+      this.setSelectedKeysAction(selectedKeys)
     },
     deleteComponent (mode) {
-      this.setKeepAliveComponentNameListAction(mode)
+      this.setKeepAliveComponentListAction(mode)
     }
   }
 }

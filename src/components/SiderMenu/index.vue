@@ -1,5 +1,5 @@
 <template>
-  <a-menu mode="inline" theme="dark" @openChange="openChange">
+  <a-menu mode="inline" theme="dark" @openChange="openChange" @select="selectChange" :openKeys="openMenuKeys" :selectedKeys="selectedMenuKeys">
     <template v-for="menuInfo in authMenusList">
       <sub-menu
         v-if="menuInfo.children && menuInfo.children.length > 0"
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { findOpenkeys, findSelectKeys } from '@/utils/public'
 import { mapState, mapActions } from 'vuex'
 import SubMenu from './SubMenu'
 export default {
@@ -24,22 +25,53 @@ export default {
   components: {
     SubMenu
   },
+  data: function () {
+    return {
+      openMenuKeys: [],
+      selectedMenuKeys: []
+    }
+  },
   computed: {
-    ...mapState('user', ['authMenusList'])
+    ...mapState('user', ['authMenusList']),
+    ...mapState('config', ['currentComponent', 'openKeys', 'selectedKeys'])
+  },
+  watch: {
+    openKeys: {
+      handler () {
+        this.openMenuKeys = this.openKeys
+      },
+      deep: true,
+      immediate: true
+    },
+    selectedKeys: {
+      handler () {
+        this.selectedMenuKeys = this.selectedKeys
+      },
+      deep: true,
+      immediate: true
+    }
   },
   methods: {
     ...mapActions('config', [
-      'setComponentNameAction',
-      'setKeepAliveListAction'
+      'setCurrentComponentAction',
+      'setKeepAliveListAction',
+      'setOpenKeysAction',
+      'setSelectedKeysAction'
     ]),
     clickMenu (menuInfo) {
-      console.log('menuInfo', menuInfo)
       this.$router.push(menuInfo.fullPath)
-      this.setComponentNameAction(menuInfo.component)
+      const openKeys = findOpenkeys(this.authMenusList, this.$route.path, [])
+      const selectedKeys = findSelectKeys(this.authMenusList, this.$route.path)
+      this.setOpenKeysAction(openKeys)
+      this.setSelectedKeysAction(selectedKeys)
+      this.setCurrentComponentAction(menuInfo)
       this.setKeepAliveListAction(menuInfo)
     },
     openChange (openKeys) {
-      console.log('openKeys', openKeys)
+      this.openMenuKeys = openKeys
+    },
+    selectChange ({ selectedKeys }) {
+      this.selectedMenuKeys = selectedKeys
     }
   }
 }
