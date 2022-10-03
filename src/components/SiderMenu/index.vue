@@ -31,6 +31,13 @@ export default {
       selectedMenuKeys: []
     }
   },
+  mounted () {
+    if (JSON.stringify(this.currentComponent) === '{}') {
+      const node = findSelectKeys(this.authMenusList, '/home')
+      this.setCurrentComponentAction(node)
+      this.setKeepAliveListAction(node)
+    }
+  },
   computed: {
     ...mapState('user', ['authMenusList']),
     ...mapState('config', ['currentComponent', 'openKeys', 'selectedKeys'])
@@ -60,12 +67,14 @@ export default {
     ]),
     clickMenu (menuInfo) {
       this.$router.push(menuInfo.fullPath)
-      const openKeys = findOpenkeys(this.authMenusList, this.$route.path, [])
-      const selectedKeys = findSelectKeys(this.authMenusList, this.$route.path)
-      this.setOpenKeysAction(openKeys)
-      this.setSelectedKeysAction(selectedKeys)
-      this.setCurrentComponentAction(menuInfo)
-      this.setKeepAliveListAction(menuInfo)
+      this.$nextTick(() => {
+        const openKeys = findOpenkeys(this.authMenusList, menuInfo.fullPath, [])
+        const node = findSelectKeys(this.authMenusList, menuInfo.fullPath)
+        this.setOpenKeysAction(openKeys)
+        this.setSelectedKeysAction([node.path])
+        this.setCurrentComponentAction(menuInfo)
+        this.setKeepAliveListAction(menuInfo)
+      })
     },
     openChange (openKeys) {
       this.openMenuKeys = openKeys

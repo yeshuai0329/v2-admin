@@ -1,4 +1,5 @@
 import router from '@/router/router'
+import { findOpenkeys } from '@/utils/public'
 /**
  * @description:  系统配置相关
  */
@@ -6,7 +7,7 @@ const state = {
   currentComponent: JSON.parse(localStorage.getItem('config/currentComponent') || '{}'),
   keepAliveList: JSON.parse(localStorage.getItem('config/keepAliveList') || '[]'),
   openKeys: JSON.parse(localStorage.getItem('config/openKeys') || '[]'),
-  selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '[]')
+  selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '["home"]')
 }
 
 const getters = {
@@ -64,17 +65,23 @@ const mutations = {
 
   // 删除缓存的组件
   setKeepAliveComponentListMution (state, idx) {
-    if (state.keepAliveList.length > 0) {
-      router.push(state.keepAliveList[0].fullPath)
-      state.componentName = state.keepAliveList[0].component
-      localStorage.setItem('config/componentName', state.componentName)
+    console.log('this', this)
+    if (idx === state.keepAliveList.length - 1) {
+      state.keepAliveList.splice(idx, 1)
+      const lastIndex = state.keepAliveList.length - 1
+      // 设置当前组件
+      router.push(state.keepAliveList[lastIndex].fullPath)
+      this.commit('config/setCurrentComponentMution', state.keepAliveList[lastIndex])
+      // 设置openkey
+      const openKeys = findOpenkeys(JSON.parse(localStorage.getItem('authMenusList')), state.currentComponent.fullPath, [])
+      this.commit('config/setOpenKeysMutation', openKeys)
+      this.commit('config/setSelectedKeysMutation', [state.currentComponent.path])
+
+      localStorage.setItem('config/keepAliveList', JSON.stringify(state.keepAliveList))
     } else {
-      router.push('/home')
-      state.componentName = 'Home'
-      localStorage.setItem('config/componentName', 'Home')
+      state.keepAliveList.splice(idx, 1)
+      localStorage.setItem('config/keepAliveList', JSON.stringify(state.keepAliveList))
     }
-    state.keepAliveList.splice(idx, 1)
-    localStorage.setItem('config/keepAliveList', JSON.stringify(state.keepAliveList))
   },
 
   // 设置展开的展开的菜单key

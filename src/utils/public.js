@@ -41,7 +41,7 @@ export const findOpenkeys = (authMenusList, fullPath, openKeys = []) => {
 export const findSelectKeys = (authMenusList, fullPath) => {
   for (const node of authMenusList) {
     if (node.fullPath === fullPath) {
-      return [node.path]
+      return node
     }
     if (node.children && node.children.length) {
       return findSelectKeys(node.children, fullPath)

@@ -34,6 +34,8 @@ export default {
   .KeepAliveTabs {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
     overflow-y: scroll;
     background: #fff;
     box-shadow:  0 1px 8px #f0f1f2;
