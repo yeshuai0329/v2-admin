@@ -206,19 +206,7 @@
 
 <script>
 export default {
-  name: 'Home',
-  activated () {
-    console.log('home激活了')
-  },
-  deactivated () {
-    console.log('home失效活了')
-  },
-  mounted () {
-    console.log('home挂载了')
-  },
-  beforeDestroy () {
-    console.log('home卸载了')
-  }
+  name: 'Home'
 }
 </script>
 

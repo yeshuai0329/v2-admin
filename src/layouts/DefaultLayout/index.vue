@@ -16,6 +16,10 @@ import LayoutHeader from '@/layouts/LayoutHeader'
 import LayoutSider from '@/layouts/LayoutSider'
 import LayoutContent from '@/layouts/LayoutContent'
 import KeepAliveTabs from '@/components/KeepAliveTabs'
+import { authRoutesToAuthMenus } from '@/utils/public'
+import { initDynamicRoutes } from '@/router/router'
+import { getMenusInfoApi } from '@/apis/Auth'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'DefaultLayout',
@@ -24,6 +28,22 @@ export default {
     LayoutSider,
     LayoutContent,
     KeepAliveTabs
+  },
+  mounted () {
+    this.getMenusInfo()
+  },
+  methods: {
+    ...mapActions('user', ['authRoutesListAction', 'authMenusListAction']),
+    // 获取菜单列表
+    async getMenusInfo () {
+      const { data } = await getMenusInfoApi()
+      if (data.code === 200) {
+        this.authRoutesListAction(data.data)
+        initDynamicRoutes()
+        const authMenusList = authRoutesToAuthMenus(data.data, [], 1)
+        this.authMenusListAction(authMenusList)
+      }
+    }
   }
 }
 </script>

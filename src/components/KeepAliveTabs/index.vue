@@ -20,12 +20,6 @@ export default {
   },
   computed: {
     ...mapState('config', ['keepAliveList'])
-  },
-  mounted () {
-    console.log('mounted', this.$store.state)
-  },
-  updated () {
-    console.log('updated', 1)
   }
 }
 </script>

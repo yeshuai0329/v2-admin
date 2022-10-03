@@ -65,7 +65,6 @@ const mutations = {
 
   // 删除缓存的组件
   setKeepAliveComponentListMution (state, idx) {
-    console.log('this', this)
     if (idx === state.keepAliveList.length - 1) {
       state.keepAliveList.splice(idx, 1)
       const lastIndex = state.keepAliveList.length - 1

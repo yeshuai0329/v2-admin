@@ -27,7 +27,6 @@
           </a-button>
           </a-col>
       </a-row>
-      <a-button @click="getMenusInfo">获取菜单</a-button>
     </div>
   </div>
 </template>

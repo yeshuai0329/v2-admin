@@ -51,8 +51,8 @@ instance.interceptors.response.use((response) => {
         instance(config)
       } else if (response.data.code === 10002) {
         // token 和 refreshtoken 都失效
-        window.location.href = '/login'
         localStorage.clear()
+        window.location.href = '/login'
       } else {
         message.error(response.data.message)
         return response
