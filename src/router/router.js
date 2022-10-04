@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
+import NProgress from 'nprogress'
 const DefaultLayout = () => import(/* webpackChunkName: "DefaultLayout" */'@/layouts/DefaultLayout')
 const Login = () => import(/* webpackChunkName: "Login" */'@/views/Login')
 
@@ -11,8 +12,9 @@ const ctx = require.context('./', true, /index\.[tj]s/)
 const routesMap = ctx.keys().reduce((routes, nextPath) => {
   const nextRoutes = ctx(nextPath).default
   return Object.assign(routes, nextRoutes)
-}, { defaultlayout: DefaultLayout })
+}, { DefaultLayout: DefaultLayout })
 
+console.log('routesMap', routesMap)
 // 基础路由页面
 const baseRoutes = [
   {
@@ -30,7 +32,7 @@ const router = new VueRouter({
 export const initDynamicRoutes = () => {
   const authRoutesList = store.state.user.authRoutesList
   authRoutesList.forEach(item => {
-    const component = item.component?.toLowerCase()
+    const component = item.component
     const temp = {
       path: item.path,
       name: item.name,
@@ -43,16 +45,20 @@ export const initDynamicRoutes = () => {
     }
     if (!temp.component) delete temp.component
     if (!temp.redirect) delete temp.redirect
-    if (item.parentName) {
-      router.addRoute(item.parentName, temp)
-    } else {
-      router.addRoute(temp)
+    if (!router.getRoutes().find(route => route.name === temp.name)) {
+      if (item.parentName) {
+        router.addRoute(item.parentName, temp)
+      } else {
+        router.addRoute(temp)
+      }
     }
   })
+  console.log('router.getRoutes()', router.getRoutes())
 }
 
 // 判断用户是否登录
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   // 如果是去login 页面,放行
   if (to.path === '/login') {
     next()
@@ -60,10 +66,15 @@ router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('token')
     if (!token) {
       router.push('/login')
+      next()
     } else {
       next()
     }
   }
+})
+
+router.afterEach((to, from, next) => {
+  NProgress.done()
 })
 
 // 解决菜单重复点击控制台报错

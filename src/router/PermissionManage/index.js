@@ -6,6 +6,6 @@ const RolesManage = () => import(/* webpackChunkName: "RolesManage" */'@/views/P
 const AccountsManage = () => import(/* webpackChunkName: "AccountsManage" */'@/views/PermissionManage/AccountsManage')
 
 export default {
-  rolesmanage: RolesManage,
-  accountsmanage: AccountsManage
+  RolesManage: RolesManage,
+  AccountsManage: AccountsManage
 }

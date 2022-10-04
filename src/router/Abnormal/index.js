@@ -4,5 +4,5 @@
 const Page404 = () => import(/* webpackChunkName: "Page404" */'@/views/Abnormal/Page404')
 
 export default {
-  page404: Page404
+  Page404: Page404
 }

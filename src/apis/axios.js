@@ -48,7 +48,7 @@ instance.interceptors.response.use((response) => {
             refreshtoken: getlocalToken('refreshtoken')
           }
         }
-        instance(config)
+        return instance(config)
       } else if (response.data.code === 10002) {
         // token 和 refreshtoken 都失效
         localStorage.clear()

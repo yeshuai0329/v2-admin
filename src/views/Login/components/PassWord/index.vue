@@ -35,8 +35,8 @@
 import { loginApi, regestApi } from '@/apis/Login'
 import { getMenusInfoApi } from '@/apis/Auth'
 import { mapActions } from 'vuex'
-import { initDynamicRoutes } from '@/router/router'
 import { authRoutesToAuthMenus } from '@/utils/public'
+import { initDynamicRoutes } from '@/router/router'
 export default {
   name: 'PassWord',
   data: function () {

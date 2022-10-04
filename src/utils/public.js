@@ -21,14 +21,19 @@ export const authRoutesToAuthMenus = (authRoutes, authMenus = [], menuParentId) 
  * @param {*} openKeys
  */
 export const findOpenkeys = (authMenusList, fullPath, openKeys = []) => {
+  if (!authMenusList || !authMenusList.length) {
+    return null
+  }
   for (const node of authMenusList) {
     if (node.fullPath === fullPath) {
       return openKeys
     }
-    if (node.children && node.children.length) {
-      return findOpenkeys(node.children, fullPath, [...openKeys, node.path])
+    const find = findOpenkeys(node.children, fullPath, [...openKeys, node.path])
+    if (find) {
+      return find
     }
   }
+  return null
 }
 
 /**
@@ -39,12 +44,17 @@ export const findOpenkeys = (authMenusList, fullPath, openKeys = []) => {
  * @returns
  */
 export const findSelectKeys = (authMenusList, fullPath) => {
+  if (!authMenusList || !authMenusList.length) {
+    return null
+  }
   for (const node of authMenusList) {
     if (node.fullPath === fullPath) {
       return node
     }
-    if (node.children && node.children.length) {
-      return findSelectKeys(node.children, fullPath)
+    const find = findSelectKeys(node.children, fullPath)
+    if (find) {
+      return find
     }
   }
+  return null
 }

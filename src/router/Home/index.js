@@ -4,5 +4,5 @@
 const Home = () => import(/* webpackChunkName: "Home" */'@/views/Home')
 
 export default {
-  home: Home
+  Home: Home
 }

@@ -1,4 +1,4 @@
-import { Button, Input, message, Modal, ConfigProvider, Layout, Menu, Row, Col, Tabs, Form, FormModel, Icon } from 'ant-design-vue'
+import { Button, Input, message, Modal, ConfigProvider, Layout, Menu, Row, Col, Tabs, Form, FormModel, Icon, Progress } from 'ant-design-vue'
 const { Sider, Header, Content } = Layout
 const { SubMenu, Item, ItemGroup } = Menu
 const { TabPane } = Tabs
@@ -23,7 +23,8 @@ const GlobalComponents = [
   Form,
   FormModel,
   Password,
-  Icon
+  Icon,
+  Progress
 ]
 
 export default (Vue) => {
