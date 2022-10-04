@@ -66,12 +66,10 @@ export default {
       'setSelectedKeysAction'
     ]),
     clickMenu (menuInfo) {
-      console.log('menuInfo', menuInfo)
       this.$router.push(menuInfo.fullPath)
       this.$nextTick(() => {
         const openKeys = findOpenkeys(this.authMenusList, menuInfo.fullPath, [])
         const node = findSelectKeys(this.authMenusList, menuInfo.fullPath)
-        console.log('node', node)
         this.setOpenKeysAction(openKeys)
         this.setSelectedKeysAction([node.path])
         this.setCurrentComponentAction(menuInfo)

@@ -14,7 +14,6 @@ const routesMap = ctx.keys().reduce((routes, nextPath) => {
   return Object.assign(routes, nextRoutes)
 }, { DefaultLayout: DefaultLayout })
 
-console.log('routesMap', routesMap)
 // 基础路由页面
 const baseRoutes = [
   {
@@ -53,7 +52,6 @@ export const initDynamicRoutes = () => {
       }
     }
   })
-  console.log('router.getRoutes()', router.getRoutes())
 }
 
 // 判断用户是否登录
