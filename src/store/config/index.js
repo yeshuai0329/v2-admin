@@ -35,7 +35,7 @@ const actions = {
   // 删除缓存的组件
   setKeepAliveComponentListAction (context, menuInfo) {
     const idx = context.state.keepAliveList.findIndex(item => item.fullPath === menuInfo.fullPath)
-    if (idx !== -1) context.commit('setKeepAliveComponentListMution', idx)
+    if (idx !== -1) context.commit('setKeepAliveComponentListMution', { menuInfo, idx })
   },
   // 设置展开的展开的菜单key
   setOpenKeysAction (context, openKeys) {
@@ -64,8 +64,11 @@ const mutations = {
   },
 
   // 删除缓存的组件
-  setKeepAliveComponentListMution (state, idx) {
-    if (idx === state.keepAliveList.length - 1) {
+  setKeepAliveComponentListMution (state, { menuInfo, idx }) {
+    if (menuInfo.component !== state.currentComponent.component) {
+      state.keepAliveList.splice(idx, 1)
+      localStorage.setItem('config/keepAliveList', JSON.stringify(state.keepAliveList))
+    } else {
       state.keepAliveList.splice(idx, 1)
       const lastIndex = state.keepAliveList.length - 1
       // 设置当前组件
@@ -76,9 +79,6 @@ const mutations = {
       this.commit('config/setOpenKeysMutation', openKeys)
       this.commit('config/setSelectedKeysMutation', [state.currentComponent.path])
 
-      localStorage.setItem('config/keepAliveList', JSON.stringify(state.keepAliveList))
-    } else {
-      state.keepAliveList.splice(idx, 1)
       localStorage.setItem('config/keepAliveList', JSON.stringify(state.keepAliveList))
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content>
+  <a-layout-content class="LayoutContent">
     <transition name="content" mode="out-in">
       <keep-alive :include="keepAliveComponentNameList">
         <router-view></router-view>
@@ -19,8 +19,10 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.ant-layout-content {
+.LayoutContent {
   background: #FFF;
+  padding: 24px;
+  overflow: scroll;
 }
 /* 进入的起点  */
 .content-enter {

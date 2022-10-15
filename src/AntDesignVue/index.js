@@ -1,10 +1,15 @@
-import { Button, Input, message, Modal, ConfigProvider, Layout, Menu, Row, Col, Tabs, Form, FormModel, Icon, Progress } from 'ant-design-vue'
+// 自定义全局组件
+import BaseTable from '@/components/BaseTable'
+import BaseSearchForm from '@/components/BaseSearchForm'
+// antd 组件
+import { Button, Input, message, Modal, ConfigProvider, Layout, Menu, Row, Col, Tabs, Form, FormModel, Icon, Progress, Table, Space } from 'ant-design-vue'
 const { Sider, Header, Content } = Layout
 const { SubMenu, Item, ItemGroup } = Menu
 const { TabPane } = Tabs
 const { Password } = Input
 
-const GlobalComponents = [
+// antd 组件
+const globalComponents = [
   Button,
   Input,
   ConfigProvider,
@@ -24,7 +29,16 @@ const GlobalComponents = [
   FormModel,
   Password,
   Icon,
-  Progress
+  Progress,
+  Table,
+  Form,
+  Space
+]
+
+// 自定义全局组件
+const customComponents = [
+  BaseTable,
+  BaseSearchForm
 ]
 
 export default (Vue) => {
@@ -34,7 +48,11 @@ export default (Vue) => {
   Vue.use(Modal)
   Vue.component(FormModel.Item.name, FormModel.Item)
   // 注册常用全局组件
-  GlobalComponents.forEach((component) => {
+  globalComponents.forEach((component) => {
+    Vue.component(component.name, component)
+  })
+
+  customComponents.forEach((component) => {
     Vue.component(component.name, component)
   })
 }
