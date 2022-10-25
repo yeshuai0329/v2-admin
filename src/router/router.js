@@ -19,6 +19,12 @@ const baseRoutes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/',
+    name: 'DefaultLayout',
+    component: DefaultLayout,
+    redirect: '/home'
   }
 ]
 
@@ -30,28 +36,27 @@ const router = new VueRouter({
 // 初始化路由信息
 export const initDynamicRoutes = () => {
   const authRoutesList = store.state.user.authRoutesList
-  authRoutesList.forEach(item => {
-    const component = item.component
+  for (const item of authRoutesList) {
+    const componentName = item.componentName
     const temp = {
       path: item.path,
       name: item.name,
-      component: routesMap[component],
+      component: routesMap[componentName],
       redirect: item.redirect,
       meta: {
         title: item.menuName
       },
       children: []
     }
-    if (!temp.component) delete temp.component
     if (!temp.redirect) delete temp.redirect
     if (!router.getRoutes().find(route => route.name === temp.name)) {
-      if (item.parentName) {
-        router.addRoute(item.parentName, temp)
+      if (item.componentParentName) {
+        router.addRoute(item.componentParentName, temp)
       } else {
         router.addRoute(temp)
       }
     }
-  })
+  }
 }
 
 // 判断用户是否登录
@@ -71,6 +76,12 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+// 修改title
+router.afterEach((to, from, next) => {
+  document.title = to.meta.title || 'v2-admin-for-antdv'
+})
+
+// 关闭进度条
 router.afterEach((to, from, next) => {
   NProgress.done()
 })

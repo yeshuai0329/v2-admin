@@ -1,6 +1,7 @@
 <template>
   <div>
     RolesManage
+    <a-input></a-input>
   </div>
 </template>
 

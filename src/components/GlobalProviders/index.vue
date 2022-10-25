@@ -35,7 +35,7 @@ export default {
       if (data.code === 200) {
         this.authRoutesListAction(data.data)
         initDynamicRoutes()
-        const authMenusList = authRoutesToAuthMenus(data.data, [], 1)
+        const authMenusList = authRoutesToAuthMenus(data.data, [], 0)
         this.authMenusListAction(authMenusList)
       }
     }

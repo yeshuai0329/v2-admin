@@ -2,7 +2,7 @@
   <div
     :class="[
       'TabButton',
-      { 'active-button': mode.name === currentComponent.name },
+      { 'active-button': mode.componentName === currentComponent.componentName },
     ]"
     @click="toggleComponent(mode)"
   >

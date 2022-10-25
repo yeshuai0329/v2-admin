@@ -1,5 +1,6 @@
 <template>
   <div>
+    <a-button @click="$router.push({name: 'ViewAccount'})">chakan</a-button>
     <a-input/>
     <h1>sada</h1>
     <h1>sada</h1>

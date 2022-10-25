@@ -1,7 +1,7 @@
 <template>
   <a-layout-content class="LayoutContent">
     <transition name="content" mode="out-in">
-      <keep-alive :include="keepAliveComponentNameList">
+      <keep-alive :include="['Home', 'RolesManage']">
         <router-view></router-view>
       </keep-alive>
     </transition>

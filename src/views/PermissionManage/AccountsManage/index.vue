@@ -1,10 +1,14 @@
 <template>
   <div class='AccountsManage' >
-    <BaseSearchForm :label-list="labelList"/>
-    <BaseTable
-      :columns="accountColumns"
-      :data-source="dataSource"
-    />
+    <div v-if="!showRouterView">
+      <BaseSearchForm :label-list="labelList"/>
+      <BaseTable
+        :columns="accountColumns"
+        :data-source="dataSource"
+      />
+      <a-button @click="viewAccountDetail">查看账号详情</a-button>
+    </div>
+    <router-view v-else></router-view>
   </div>
 </template>
 
@@ -44,7 +48,21 @@ export default {
       ],
       searchForm: {
 
-      }
+      },
+      showRouterView: false
+    }
+  },
+  mounted () {
+    console.log('first', this.$route)
+    if (this.$route.name === 'AccountsManage') {
+      this.showRouterView = false
+    } else {
+      this.showRouterView = true
+    }
+  },
+  methods: {
+    viewAccountDetail () {
+      this.$router.push({ name: 'ViewAccount' })
     }
   }
 }

@@ -3,9 +3,9 @@
     <LayoutSider />
     <a-layout class="layout-right">
       <LayoutHeader class="layout-right-header"/>
-      <a-layout class="layout-right-tabs">
+      <!-- <a-layout class="layout-right-tabs">
         <keep-alive-tabs />
-      </a-layout>
+      </a-layout> -->
       <LayoutContent class="layout-right-content"/>
     </a-layout>
   </a-layout>
@@ -15,15 +15,15 @@
 import LayoutHeader from '@/layouts/LayoutHeader'
 import LayoutSider from '@/layouts/LayoutSider'
 import LayoutContent from '@/layouts/LayoutContent'
-import KeepAliveTabs from '@/components/KeepAliveTabs'
+// import KeepAliveTabs from '@/components/KeepAliveTabs'
 
 export default {
   name: 'DefaultLayout',
   components: {
     LayoutHeader,
     LayoutSider,
-    LayoutContent,
-    KeepAliveTabs
+    LayoutContent
+    // KeepAliveTabs
   }
 }
 </script>

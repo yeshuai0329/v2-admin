@@ -4,7 +4,7 @@
  */
 export const authRoutesToAuthMenus = (authRoutes, authMenus = [], menuParentId) => {
   for (const item of authRoutes) {
-    if (item.menuParentId === menuParentId) {
+    if (item.menuParentId === menuParentId && !item.isDetailMenu) {
       var newItem = { ...item, children: [] }
       authMenus.push(newItem)
       authRoutesToAuthMenus(authRoutes, newItem.children, newItem.menuId)
