@@ -2,16 +2,16 @@
   <a-sub-menu
     :icon="props.mode.menuIcon"
     :title="props.mode.menuName"
-    :key="props.mode.path"
+    :key="props.mode.menuId"
   >
     <template v-for="menu in props.mode.children">
       <sub-menu
         v-if="menu.children && menu.children.length > 0"
         :mode="menu"
-        :key="menu.path"
+        :key="menu.menuId"
         :click-menu="props.clickMenu"
       />
-      <a-menu-item v-else :key="menu.path" @click="props.clickMenu(menu)">
+      <a-menu-item v-else :key="menu.menuId" @click="props.clickMenu(menu)">
         {{ menu.menuName }}
       </a-menu-item>
     </template>

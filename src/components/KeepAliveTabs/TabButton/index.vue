@@ -2,13 +2,13 @@
   <div
     :class="[
       'TabButton',
-      { 'active-button': mode.componentName === currentComponent.componentName },
+      { 'active-button': mode.name === currentComponent.name },
     ]"
     @click="toggleComponent(mode)"
   >
     {{ mode.menuName }}
     <a-icon
-      v-if="mode.component !== 'Home'"
+      v-if="mode.name !== 'Home'"
       type="close"
       @click="deleteComponent(mode)"
       class="TabButton-icon"
@@ -17,8 +17,9 @@
 </template>
 
 <script>
-import { findOpenkeys, findSelectKeys } from '@/utils/public'
+import { findOpenkeys } from '@/utils/public'
 import { mapState, mapActions } from 'vuex'
+import { uniq } from 'lodash'
 export default {
   name: 'TabButton',
   props: {
@@ -28,7 +29,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('config', ['currentComponent']),
+    ...mapState('config', ['currentComponent', 'openKeys', 'selectedKeys']),
     ...mapState('user', ['authMenusList'])
   },
   methods: {
@@ -39,12 +40,12 @@ export default {
       'setSelectedKeysAction'
     ]),
     toggleComponent (mode) {
+      if (mode.name === this.currentComponent.name) return
       this.setCurrentComponentAction(mode)
       this.$router.push(mode.fullPath)
-      const openKeys = findOpenkeys(this.authMenusList, mode.fullPath, [])
-      const node = findSelectKeys(this.authMenusList, mode.fullPath)
-      this.setOpenKeysAction(openKeys)
-      this.setSelectedKeysAction([node.path])
+      const currentOpenKeys = findOpenkeys(this.authMenusList, mode.menuId, [])
+      this.setOpenKeysAction(uniq(this.openKeys.concat(currentOpenKeys)))
+      this.setSelectedKeysAction([mode.menuId])
     },
     deleteComponent (mode) {
       this.setKeepAliveComponentListAction(mode)

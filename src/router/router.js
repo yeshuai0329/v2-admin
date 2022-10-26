@@ -44,7 +44,11 @@ export const initDynamicRoutes = () => {
       component: routesMap[componentName],
       redirect: item.redirect,
       meta: {
-        title: item.menuName
+        title: item.menuName,
+        menuId: item.menuId,
+        menuParentId: item.menuParentId,
+        isDetailMenu: item.isDetailMenu,
+        isSubMenu: item.isSubMenu
       },
       children: []
     }

@@ -17,18 +17,18 @@ export const authRoutesToAuthMenus = (authRoutes, authMenus = [], menuParentId) 
 /**
  * @description 查找默认展开的path的集合
  * @param {*} authMenusList
- * @param {*} fullPath
+ * @param {*} menuId
  * @param {*} openKeys
  */
-export const findOpenkeys = (authMenusList, fullPath, openKeys = []) => {
+export const findOpenkeys = (authMenusList, menuId, openKeys = []) => {
   if (!authMenusList || !authMenusList.length) {
     return null
   }
   for (const node of authMenusList) {
-    if (node.fullPath === fullPath) {
+    if (node.menuId === menuId) {
       return openKeys
     }
-    const find = findOpenkeys(node.children, fullPath, [...openKeys, node.path])
+    const find = findOpenkeys(node.children, menuId, [...openKeys, node.menuId])
     if (find) {
       return find
     }
@@ -40,18 +40,18 @@ export const findOpenkeys = (authMenusList, fullPath, openKeys = []) => {
  *
  * @description 查找选中的keys
  * @param {*} authMenusList
- * @param {*} fullPath
+ * @param {*} menuId
  * @returns
  */
-export const findSelectKeys = (authMenusList, fullPath) => {
+export const findSelectNode = (authMenusList, menuId) => {
   if (!authMenusList || !authMenusList.length) {
     return null
   }
   for (const node of authMenusList) {
-    if (node.fullPath === fullPath) {
+    if (node.menuId === menuId) {
       return node
     }
-    const find = findSelectKeys(node.children, fullPath)
+    const find = findSelectNode(node.children, menuId)
     if (find) {
       return find
     }

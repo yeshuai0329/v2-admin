@@ -1,5 +1,6 @@
 import router from '@/router/router'
 import { findOpenkeys } from '@/utils/public'
+import { uniq } from 'lodash'
 /**
  * @description:  系统配置相关
  */
@@ -7,7 +8,7 @@ const state = {
   currentComponent: JSON.parse(localStorage.getItem('config/currentComponent') || '{}'),
   keepAliveList: JSON.parse(localStorage.getItem('config/keepAliveList') || '[]'),
   openKeys: JSON.parse(localStorage.getItem('config/openKeys') || '[]'),
-  selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '["home"]')
+  selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '[]')
 }
 
 const getters = {
@@ -28,13 +29,13 @@ const actions = {
   },
   // 当前缓存的路由列表
   setKeepAliveListAction (context, menuInfo) {
-    const idx = context.state.keepAliveList.findIndex(item => item.fullPath === menuInfo.fullPath)
+    const idx = context.state.keepAliveList.findIndex(item => item.menuId === menuInfo.menuId)
     // 路由缓存列表中不存在
     if (idx === -1) context.commit('setKeepAliveListMution', menuInfo)
   },
   // 删除缓存的组件
   setKeepAliveComponentListAction (context, menuInfo) {
-    const idx = context.state.keepAliveList.findIndex(item => item.fullPath === menuInfo.fullPath)
+    const idx = context.state.keepAliveList.findIndex(item => item.menuId === menuInfo.menuId)
     if (idx !== -1) context.commit('setKeepAliveComponentListMution', { menuInfo, idx })
   },
   // 设置展开的展开的菜单key
@@ -65,7 +66,7 @@ const mutations = {
 
   // 删除缓存的组件
   setKeepAliveComponentListMution (state, { menuInfo, idx }) {
-    if (menuInfo.component !== state.currentComponent.component) {
+    if (menuInfo.name !== state.currentComponent.name) {
       state.keepAliveList.splice(idx, 1)
       localStorage.setItem('config/keepAliveList', JSON.stringify(state.keepAliveList))
     } else {
@@ -75,10 +76,9 @@ const mutations = {
       router.push(state.keepAliveList[lastIndex].fullPath)
       this.commit('config/setCurrentComponentMution', state.keepAliveList[lastIndex])
       // 设置openkey
-      const openKeys = findOpenkeys(JSON.parse(localStorage.getItem('authMenusList')), state.currentComponent.fullPath, [])
-      this.commit('config/setOpenKeysMutation', openKeys)
-      this.commit('config/setSelectedKeysMutation', [state.currentComponent.path])
-
+      const openKeys = findOpenkeys(JSON.parse(localStorage.getItem('authMenusList')), state.currentComponent.menuId, [])
+      this.commit('config/setOpenKeysMutation', uniq(state.openKeys.concat(openKeys)))
+      this.commit('config/setSelectedKeysMutation', [state.currentComponent.menuId])
       localStorage.setItem('config/keepAliveList', JSON.stringify(state.keepAliveList))
     }
   },

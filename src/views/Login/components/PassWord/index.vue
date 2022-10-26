@@ -35,7 +35,7 @@
 import { loginApi, regestApi } from '@/apis/Login'
 import { getMenusInfoApi } from '@/apis/Auth'
 import { mapActions } from 'vuex'
-import { authRoutesToAuthMenus } from '@/utils/public'
+import { authRoutesToAuthMenus, findSelectNode } from '@/utils/public'
 import { initDynamicRoutes } from '@/router/router'
 export default {
   name: 'PassWord',
@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     ...mapActions('user', ['userInfoAction', 'authRoutesListAction', 'authMenusListAction']),
+    ...mapActions('config', ['setKeepAliveListAction']),
     async userLogin  () {
       if (!this.userInfo.accountNumber || !this.userInfo.passWord) {
         this.$message.error('请输入账号或密码!')
@@ -87,6 +88,8 @@ export default {
         initDynamicRoutes()
         const authMenusList = authRoutesToAuthMenus(data.data, [], 0)
         this.authMenusListAction(authMenusList)
+        const node = findSelectNode(authMenusList, 1)
+        this.setKeepAliveListAction(node || {})
         this.$router.push('/home')
         this.$message.success('账号登录成功!')
       }
