@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import AntDesignVue from '@/AntDesignVue'
 import GlobalProviders from '@/components/GlobalProviders'
-import router from '@/router/router'
+import router from '@/router/globalRouterGuard'
 import '@/styles/reset.less'
 import '@/styles/nprogress.less'
 import store from '@/store'

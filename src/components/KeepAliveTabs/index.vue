@@ -30,10 +30,14 @@ export default {
     height: 100%;
     display: flex;
     align-items: center;
-    overflow-y: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
     background: #fff;
     box-shadow:  0 1px 8px #f0f1f2;
     position: relative;
     z-index: 98;
+    &::-webkit-scrollbar{
+      display:none;
+    }
   }
 </style>

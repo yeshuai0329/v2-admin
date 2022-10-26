@@ -17,9 +17,7 @@
 </template>
 
 <script>
-import { findOpenkeys } from '@/utils/public'
 import { mapState, mapActions } from 'vuex'
-import { uniq } from 'lodash'
 export default {
   name: 'TabButton',
   props: {
@@ -43,9 +41,6 @@ export default {
       if (mode.name === this.currentComponent.name) return
       this.setCurrentComponentAction(mode)
       this.$router.push(mode.fullPath)
-      const currentOpenKeys = findOpenkeys(this.authMenusList, mode.menuId, [])
-      this.setOpenKeysAction(uniq(this.openKeys.concat(currentOpenKeys)))
-      this.setSelectedKeysAction([mode.menuId])
     },
     deleteComponent (mode) {
       this.setKeepAliveComponentListAction(mode)
@@ -65,6 +60,7 @@ export default {
   line-height: 26px;
   padding: 0px 8px;
   margin: 0px 4px;
+  flex-shrink: 0;
 }
 .active-button {
   background-color: rgb(64, 158, 255);

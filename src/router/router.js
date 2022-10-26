@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
-import NProgress from 'nprogress'
+import baseRoutes from '@/router/baseRoutes'
 const DefaultLayout = () => import(/* webpackChunkName: "DefaultLayout" */'@/layouts/DefaultLayout')
-const Login = () => import(/* webpackChunkName: "Login" */'@/views/Login')
 
 Vue.use(VueRouter)
 
@@ -13,20 +12,6 @@ const routesMap = ctx.keys().reduce((routes, nextPath) => {
   const nextRoutes = ctx(nextPath).default
   return Object.assign(routes, nextRoutes)
 }, { DefaultLayout: DefaultLayout })
-
-// 基础路由页面
-const baseRoutes = [
-  {
-    path: '/login',
-    component: Login
-  },
-  {
-    path: '/',
-    name: 'DefaultLayout',
-    component: DefaultLayout,
-    redirect: '/home'
-  }
-]
 
 const router = new VueRouter({
   mode: 'history',
@@ -62,33 +47,6 @@ export const initDynamicRoutes = () => {
     }
   }
 }
-
-// 判断用户是否登录
-router.beforeEach((to, from, next) => {
-  NProgress.start()
-  // 如果是去login 页面,放行
-  if (to.path === '/login') {
-    next()
-  } else {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      router.push('/login')
-      next()
-    } else {
-      next()
-    }
-  }
-})
-
-// 修改title
-router.afterEach((to, from, next) => {
-  document.title = to.meta.title || 'v2-admin-for-antdv'
-})
-
-// 关闭进度条
-router.afterEach((to, from, next) => {
-  NProgress.done()
-})
 
 // 解决菜单重复点击控制台报错
 const VueRouterPush = VueRouter.prototype.push
