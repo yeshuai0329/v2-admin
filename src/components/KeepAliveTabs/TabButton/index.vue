@@ -52,12 +52,12 @@ export default {
 <style lang='less' scoped>
 .TabButton {
   cursor: pointer;
-  height: 26px;
+  height: 28px;
   border: 1px solid #d8dce5;
   color: #495060;
   background: #fff;
   font-size: 12px;
-  line-height: 26px;
+  line-height: 28px;
   padding: 0px 8px;
   margin: 0px 4px;
   flex-shrink: 0;

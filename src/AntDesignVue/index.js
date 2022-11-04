@@ -1,6 +1,8 @@
 // 自定义全局组件
 import BaseTable from '@/components/BaseTable'
 import BaseSearchForm from '@/components/BaseSearchForm'
+import SlideVerify from 'vue-monoplasty-slide-verify'
+
 // antd 组件
 import { Button, Input, message, Modal, ConfigProvider, Layout, Menu, Row, Col, Tabs, Form, FormModel, Icon, Progress, Table, Space } from 'ant-design-vue'
 const { Sider, Header, Content } = Layout
@@ -46,6 +48,8 @@ export default (Vue) => {
   Vue.prototype.$message = message
   // 全局注册 Modal 组件
   Vue.use(Modal)
+  Vue.use(SlideVerify)
+
   Vue.component(FormModel.Item.name, FormModel.Item)
   // 注册常用全局组件
   globalComponents.forEach((component) => {
