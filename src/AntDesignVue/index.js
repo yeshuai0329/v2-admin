@@ -4,7 +4,11 @@ import BaseSearchForm from '@/components/BaseSearchForm'
 import SlideVerify from 'vue-monoplasty-slide-verify'
 
 // antd 组件
-import { Button, Input, message, Modal, ConfigProvider, Layout, Menu, Row, Col, Tabs, Form, FormModel, Icon, Progress, Table, Space } from 'ant-design-vue'
+import {
+  Button, Input, message, Modal, ConfigProvider, Layout, Menu,
+  Row, Col, Tabs, Form, FormModel, Icon, Progress, Table, Space,
+  Avatar, Dropdown, Popover, Badge, Divider, Empty
+} from 'ant-design-vue'
 const { Sider, Header, Content } = Layout
 const { SubMenu, Item, ItemGroup } = Menu
 const { TabPane } = Tabs
@@ -12,29 +16,10 @@ const { Password } = Input
 
 // antd 组件
 const globalComponents = [
-  Button,
-  Input,
-  ConfigProvider,
-  Layout,
-  Sider,
-  Header,
-  Content,
-  Menu,
-  SubMenu,
-  Item,
-  ItemGroup,
-  Row,
-  Col,
-  Tabs,
-  TabPane,
-  Form,
-  FormModel,
-  Password,
-  Icon,
-  Progress,
-  Table,
-  Form,
-  Space
+  Button, Input, ConfigProvider, Layout, Sider, Header, Content, Menu,
+  SubMenu, Item, ItemGroup, Row, Col, Tabs, TabPane, Form, FormModel,
+  Password, Icon, Progress, Table, Form, Space, Avatar, Dropdown, Popover,
+  Badge, Divider, Empty
 ]
 
 // 自定义全局组件

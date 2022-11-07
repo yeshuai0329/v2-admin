@@ -2,9 +2,8 @@ import Vue from 'vue'
 import AntDesignVue from '@/AntDesignVue'
 import GlobalProviders from '@/components/GlobalProviders'
 import router from '@/router/globalRouterGuard'
-import '@/styles/reset.less'
-import '@/styles/nprogress.less'
 import store from '@/store'
+import '@/styles/index.less'
 
 Vue.config.productionTip = false
 // 引入全局注册的 ant-design-vue 的组件

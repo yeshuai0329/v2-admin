@@ -41,7 +41,7 @@
       <div class="buttonGroup">
         <a-row :gutter="[24, 24]">
           <a-col :span="12">
-            <a-button size="large" block @click="userRegist">注册</a-button>
+            <a-button size="large" block @click="registButton">注册</a-button>
           </a-col>
           <a-col :span="12">
             <a-button
@@ -157,7 +157,12 @@ export default {
       this.siderVerifyShow = false
     },
     onSuccess () {
-      this.loginAction()
+      if (this.registLoading) {
+        this.regestAction()
+      }
+      if (this.loginLoading) {
+        this.loginAction()
+      }
     },
     loginButton () {
       if (this.activeKey === '1') {
@@ -181,18 +186,26 @@ export default {
         this.getMenusInfo()
       }
     },
-    async userRegist () {
-      if (!this.userInfo.accountNumber || !this.userInfo.passWord) {
-        this.$message.error('请输入账号或密码!')
-      } else {
-        this.registLoading = true
-        const { data } = await regestApi(this.userInfo)
-        this.registLoading = false
-        if (data.code === 200) {
-          this.$message.success('账号注册成功!')
+
+    registButton () {
+      this.$refs.formTypeOne.validate((err, message) => {
+        if (!err) {
+          this.$message.error('请输入账号和密码')
+          return
         }
-      }
+        this.registLoading = true
+        this.siderVerifyShow = true
+      })
     },
+    async regestAction () {
+      const { data } = await regestApi(this.formTypeOne)
+      if (data.code === 200) {
+        this.$message.success('账号注册成功!')
+      }
+      this.registLoading = false
+      this.siderVerifyShow = false
+    },
+
     // 获取菜单列表
     async getMenusInfo () {
       const { data } = await getMenusInfoApi()
