@@ -3,7 +3,7 @@
     <a-dropdown>
     <a-avatar shape="square" :size="48" icon="user" />
     <a-menu slot="overlay">
-      <a-menu-item>
+      <a-menu-item @click="toPersonCenter">
         <a-icon type="user" />
         个人中心
       </a-menu-item>
@@ -24,6 +24,9 @@ export default {
       localStorage.clear()
       sessionStorage.clear()
       window.location.reload()
+    },
+    toPersonCenter () {
+      this.$router.push('/personcenter')
     }
   }
 }

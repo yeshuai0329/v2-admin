@@ -8,7 +8,8 @@ const state = {
   currentComponent: JSON.parse(localStorage.getItem('config/currentComponent') || '{}'),
   keepAliveList: JSON.parse(localStorage.getItem('config/keepAliveList') || '[]'),
   openKeys: JSON.parse(localStorage.getItem('config/openKeys') || '[]'),
-  selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '[]')
+  selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '[]'),
+  breadCrumdList: []
 }
 
 const getters = {
@@ -45,6 +46,10 @@ const actions = {
   // 设置选中的菜单
   setSelectedKeysAction (context, selectedKeys) {
     context.commit('setSelectedKeysMutation', selectedKeys)
+  },
+  // 设置面包屑
+  setBreadCrumdListAction (context, breadCrumdList) {
+    context.commit('setBreadCrumdListMutation', breadCrumdList)
   }
 }
 
@@ -93,6 +98,10 @@ const mutations = {
   setSelectedKeysMutation (state, selectedKeys) {
     state.selectedKeys = selectedKeys
     localStorage.setItem('config/selectedKeys', JSON.stringify(state.selectedKeys))
+  },
+  // 设置面包屑
+  setBreadCrumdListMutation (state, breadCrumdList) {
+    state.breadCrumdList = breadCrumdList
   }
 }
 

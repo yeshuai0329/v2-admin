@@ -22,6 +22,17 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+// 判断路由是否存在,不存在跳转404
+// router.afterEach((to, from, next) => {
+//   const authRoutesList = JSON.parse(localStorage.getItem('authRoutesList')) || []
+//   const bool = authRoutesList.find(item => item.fullPath === to.fullPath)
+//   if (bool || ['/404', '/500'].includes(to.fullPath)) {
+//     next()
+//   } else {
+//     next('/404')
+//   }
+// })
+
 // --------------------------------------------------- 全局后置守卫 -------------------------------------------------/
 
 // 修改title
@@ -42,22 +53,44 @@ router.afterEach((to, from, next) => {
   if (authRoutesList.find(route => route.menuId === meta.menuId)) {
     let openKeys = []
     let node = {}
-    // 如果是详情页,那么找父id
-    if (meta.isDetailMenu === 1) {
-      openKeys = findOpenkeys(authMenusList, meta.menuParentId, [])
-      node = findSelectNode(authMenusList, meta.menuParentId)
-      store.dispatch('config/setSelectedKeysAction', [meta.menuParentId])
-    }
-    // 如果是普通页面,那么找父id
+    // 如果不是详情页
     if (meta.isDetailMenu === 0) {
-      openKeys = findOpenkeys(authMenusList, meta.menuId, [])
-      node = findSelectNode(authMenusList, meta.menuId)
+      openKeys = findOpenkeys(authMenusList, meta.menuId, []) || openKeys
+      node = findSelectNode(authMenusList, meta.menuId) || node
       store.dispatch('config/setSelectedKeysAction', [meta.menuId])
     }
+    // 如果是详情页,那么找父id
+    if (meta.isDetailMenu === 1) {
+      openKeys = findOpenkeys(authMenusList, meta.menuParentId, []) || openKeys
+      node = findSelectNode(authMenusList, meta.menuParentId) || node
+      store.dispatch('config/setSelectedKeysAction', [meta.menuParentId])
+    }
     store.dispatch('config/setOpenKeysAction', uniq(openKeys.concat(store.state.config.openKeys)))
-    store.dispatch('config/setCurrentComponentAction', node || {})
-    store.dispatch('config/setKeepAliveListAction', node || {})
+    store.dispatch('config/setCurrentComponentAction', node)
+    store.dispatch('config/setKeepAliveListAction', node)
   }
 })
 
+// 设置面包屑
+router.afterEach((to, from, next) => {
+  const authRoutesList = store.state.user.authRoutesList
+  const route = authRoutesList.find((route) => route.fullPath === to.fullPath)
+  if (route) {
+    const findBreadCrumbList = (authRoutesList, route, BreadCrumbList = []) => {
+      BreadCrumbList.unshift(route)
+      let temp = route
+      while (temp.menuParentId) {
+        const findOne = authRoutesList.find((item) => item.menuId === temp.menuParentId)
+        if (findOne) {
+          BreadCrumbList.unshift(findOne)
+          temp = findOne
+        } else {
+          temp = {}
+        }
+      }
+      return BreadCrumbList
+    }
+    store.dispatch('config/setBreadCrumdListAction', findBreadCrumbList(authRoutesList, route))
+  }
+})
 export default router

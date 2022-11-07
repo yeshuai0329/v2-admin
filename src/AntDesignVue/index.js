@@ -7,7 +7,7 @@ import SlideVerify from 'vue-monoplasty-slide-verify'
 import {
   Button, Input, message, Modal, ConfigProvider, Layout, Menu,
   Row, Col, Tabs, Form, FormModel, Icon, Progress, Table, Space,
-  Avatar, Dropdown, Popover, Badge, Divider, Empty
+  Avatar, Dropdown, Popover, Badge, Divider, Empty, Breadcrumb
 } from 'ant-design-vue'
 const { Sider, Header, Content } = Layout
 const { SubMenu, Item, ItemGroup } = Menu
@@ -34,6 +34,7 @@ export default (Vue) => {
   // 全局注册 Modal 组件
   Vue.use(Modal)
   Vue.use(SlideVerify)
+  Vue.use(Breadcrumb)
 
   Vue.component(FormModel.Item.name, FormModel.Item)
   // 注册常用全局组件

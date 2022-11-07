@@ -7,12 +7,6 @@ const setToken = ({ token, refreshtoken }) => {
   localStorage.setItem('refreshtoken', refreshtoken)
 }
 
-// 获取token
-const getlocalToken = (key) => {
-  const token = localStorage.getItem(key)
-  return token
-}
-
 const instance = axios.create({
   timeout: 30000, // 超时时间
   withCredentials: true,
@@ -22,12 +16,8 @@ const instance = axios.create({
 
 // 请求拦截器：在请求被发送出去之前，做一些验证工作
 instance.interceptors.request.use((config) => {
-  config.headers = {
-    ...{
-      token: getlocalToken('token'),
-      refreshtoken: getlocalToken('refreshtoken')
-    }
-  }
+  config.headers.token = localStorage.getItem('token')
+  config.headers.refreshtoken = localStorage.getItem('refreshtoken')
   return config
 }, (error) => {
   return Promise.reject(error)
@@ -37,17 +27,18 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use((response) => {
   // 统一拦截错误码
   if (response.status === 200 && response.data) {
+    console.log('response', response)
+    // 刷新token的有效期
+    const token = response.headers.token
+    const refreshtoken = response.headers.refreshtoken
+    setToken({ token, refreshtoken })
+    // 异常处理
     if (response.data.code !== 200) {
       if (response.data.code === 10000) {
         // code === 10000 代表token失效,要刷新token了
-        setToken(response.data.data)
         const config = response.config
-        config.headers = {
-          ...{
-            token: getlocalToken('token'),
-            refreshtoken: getlocalToken('refreshtoken')
-          }
-        }
+        config.headers.token = localStorage.getItem('token')
+        config.headers.refreshtoken = localStorage.getItem('refreshtoken')
         return instance(config)
       } else if (response.data.code === 10002) {
         // token 和 refreshtoken 都失效

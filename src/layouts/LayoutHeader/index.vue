@@ -1,6 +1,8 @@
 <template>
   <a-layout-header class="LayoutHeader">
-    <div class="LayoutHeader-left">12312</div>
+    <div class="LayoutHeader-left">
+      <BreadCrumb/>
+    </div>
     <div class="LayoutHeader-right">
       <a-space>
         <NoticeCenter/>
@@ -15,12 +17,14 @@
 import FullScreen from './components/FullScreen'
 import PersonHead from './components/PersonHead'
 import NoticeCenter from './components/NoticeCenter'
+import BreadCrumb from './components/BreadCrumb'
 export default {
   name: 'LayoutHeader',
   components: {
     FullScreen,
     PersonHead,
-    NoticeCenter
+    NoticeCenter,
+    BreadCrumb
   }
 }
 </script>
@@ -35,6 +39,8 @@ export default {
   justify-content: space-between;
   &-left {
     height: 100%;
+      display: flex;
+      align-items: center;
   }
 
   &-right {
