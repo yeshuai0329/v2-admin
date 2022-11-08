@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider :collapsed="isExpand" theme="light">
+  <a-layout-sider :collapsed="collapsed" theme="light">
     <sider-menu/>
   </a-layout-sider>
 </template>
@@ -14,7 +14,7 @@ export default {
     SiderMenu
   },
   computed: {
-    ...mapState('config', ['isExpand'])
+    ...mapState('config', ['collapsed'])
   }
 }
 </script>

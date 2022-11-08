@@ -2,8 +2,8 @@
   <div class="BreadCrumb">
     <a-breadcrumb>
       <template v-for="item in breadCrumdList">
-        <a-breadcrumb-item href :key="item.fullPath">
-          <a-icon v-if="item.icon" type="user" />
+        <a-breadcrumb-item href :key="item.fullPath" class="breadcrumb-item">
+          <IconFont :icon="item.icon"/>
           <span @click="toClickPage(item)">{{ item.menuName }}</span>
         </a-breadcrumb-item>
       </template>
@@ -17,7 +17,6 @@ export default {
   props: ['breadCrumdList'],
   methods: {
     toClickPage (item) {
-      console.log('item', item)
       this.$router.push(item.fullPath)
     }
   }
@@ -25,4 +24,9 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.BreadCrumb{
+  .breadcrumb-item {
+    vertical-align: baseline;
+  }
+}
 </style>

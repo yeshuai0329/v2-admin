@@ -14,24 +14,19 @@ router.beforeEach((to, from, next) => {
   } else {
     const token = localStorage.getItem('token')
     if (!token) {
-      router.push('/login')
-      next()
+      next('/login')
     } else {
-      next()
+      const authRoutesList = JSON.parse(localStorage.getItem('authRoutesList'))
+      if (!authRoutesList) next('/login')
+      const route = authRoutesList.find(item => item.fullPath === to.fullPath)
+      if (route || ['/404', '/500'].includes(to.fullPath)) {
+        next()
+      } else {
+        next('/404')
+      }
     }
   }
 })
-
-// 判断路由是否存在,不存在跳转404
-// router.afterEach((to, from, next) => {
-//   const authRoutesList = JSON.parse(localStorage.getItem('authRoutesList')) || []
-//   const bool = authRoutesList.find(item => item.fullPath === to.fullPath)
-//   if (bool || ['/404', '/500'].includes(to.fullPath)) {
-//     next()
-//   } else {
-//     next('/404')
-//   }
-// })
 
 // --------------------------------------------------- 全局后置守卫 -------------------------------------------------/
 
@@ -53,21 +48,33 @@ router.afterEach((to, from, next) => {
   if (authRoutesList.find(route => route.menuId === meta.menuId)) {
     let openKeys = []
     let node = {}
-    // 如果不是详情页
-    if (meta.isDetailMenu === 0) {
-      openKeys = findOpenkeys(authMenusList, meta.menuId, []) || openKeys
-      node = findSelectNode(authMenusList, meta.menuId) || node
-      store.dispatch('config/setSelectedKeysAction', [meta.menuId])
-    }
+
     // 如果是详情页,那么找父id
     if (meta.isDetailMenu === 1) {
       openKeys = findOpenkeys(authMenusList, meta.menuParentId, []) || openKeys
       node = findSelectNode(authMenusList, meta.menuParentId) || node
       store.dispatch('config/setSelectedKeysAction', [meta.menuParentId])
+      store.dispatch('config/setOpenKeysAction', uniq(openKeys.concat(store.state.config.openKeys)))
+      store.dispatch('config/setCurrentComponentAction', node)
+      store.dispatch('config/setKeepAliveListAction', node)
     }
-    store.dispatch('config/setOpenKeysAction', uniq(openKeys.concat(store.state.config.openKeys)))
-    store.dispatch('config/setCurrentComponentAction', node)
-    store.dispatch('config/setKeepAliveListAction', node)
+
+    if (meta.menuIsShow === 1 && meta.isDetailMenu === 0) {
+      openKeys = findOpenkeys(authMenusList, meta.menuId, []) || openKeys
+      node = findSelectNode(authMenusList, meta.menuId) || node
+      store.dispatch('config/setSelectedKeysAction', [meta.menuId])
+      store.dispatch('config/setOpenKeysAction', uniq(openKeys.concat(store.state.config.openKeys)))
+      store.dispatch('config/setCurrentComponentAction', node)
+      store.dispatch('config/setKeepAliveListAction', node)
+    }
+
+    if (meta.menuIsShow === 0) {
+      node = authRoutesList.find(item => item.menuId === meta.menuId) || node
+      store.dispatch('config/setSelectedKeysAction', [])
+      store.dispatch('config/setOpenKeysAction', uniq(openKeys.concat(store.state.config.openKeys)))
+      store.dispatch('config/setCurrentComponentAction', node)
+      store.dispatch('config/setKeepAliveListAction', node)
+    }
   }
 })
 

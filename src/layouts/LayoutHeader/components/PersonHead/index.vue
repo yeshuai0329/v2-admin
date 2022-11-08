@@ -17,9 +17,14 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'PersonHead',
+  computed: {
+    ...mapState('user', ['authRoutesList'])
+  },
   methods: {
+    ...mapActions('config', ['setCurrentComponentAction']),
     logout () {
       localStorage.clear()
       sessionStorage.clear()

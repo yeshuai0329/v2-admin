@@ -33,7 +33,8 @@ export const initDynamicRoutes = () => {
         menuId: item.menuId,
         menuParentId: item.menuParentId,
         isDetailMenu: item.isDetailMenu,
-        isSubMenu: item.isSubMenu
+        isSubMenu: item.isSubMenu,
+        menuIsShow: item.menuIsShow
       },
       children: []
     }

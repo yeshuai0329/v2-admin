@@ -1,6 +1,6 @@
 <template>
   <div class='ToggleButton' >
-    <a-icon :type="isExpand? 'menu-unfold':'menu-fold'" @click="toggleAction"/>
+    <a-icon :type="collapsed? 'menu-fold':'menu-unfold'" @click="toggleAction"/>
   </div>
 </template>
 
@@ -8,13 +8,24 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'ToggleButton',
+  data () {
+    return {
+      keepOpenKeys: []
+    }
+  },
   computed: {
-    ...mapState('config', ['isExpand'])
+    ...mapState('config', ['collapsed', 'openKeys'])
   },
   methods: {
-    ...mapActions('config', ['setIsExpandAction']),
+    ...mapActions('config', ['setCollapsedAction', 'setOpenKeysAction']),
     toggleAction () {
-      this.setIsExpandAction(!this.isExpand)
+      if (!this.collapsed) {
+        this.keepOpenKeys = this.openKeys
+        this.setOpenKeysAction([])
+      } else {
+        this.setOpenKeysAction(this.keepOpenKeys)
+      }
+      this.setCollapsedAction(!this.collapsed)
     }
   }
 }

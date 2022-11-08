@@ -1,8 +1,8 @@
 <template>
-    <i  v-if="isIconFont" class='anticon'>
-      <i v-if="isIconFont" :class="[ 'iconfont', icon]" />
+    <a-icon v-if="icon && !isIconFont" :type="icon"/>
+    <i  v-else class='anticon'>
+      <i :class="[ 'iconfont', icon]" />
     </i>
-    <a-icon v-else :type="icon"/>
 </template>
 
 <script>

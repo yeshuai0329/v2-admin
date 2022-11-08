@@ -10,7 +10,7 @@ const state = {
   openKeys: JSON.parse(localStorage.getItem('config/openKeys') || '[]'),
   selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '[]'),
   breadCrumdList: [],
-  isExpand: JSON.parse(localStorage.getItem('config/isExpand') || 'true')
+  collapsed: JSON.parse(localStorage.getItem('config/collapsed') || 'true')
 }
 
 const getters = {
@@ -53,8 +53,8 @@ const actions = {
     context.commit('setBreadCrumdListMutation', breadCrumdList)
   },
   // 设置菜单展开关闭
-  setIsExpandAction (context, value) {
-    context.commit('setIsExpandMutation', value)
+  setCollapsedAction (context, value) {
+    context.commit('setCollapsedMutation', value)
   }
 }
 
@@ -109,9 +109,9 @@ const mutations = {
     state.breadCrumdList = breadCrumdList
   },
   // 设置面包屑
-  setIsExpandMutation (state, value) {
-    state.isExpand = value
-    localStorage.setItem('config/isExpand', JSON.stringify(state.isExpand))
+  setCollapsedMutation (state, value) {
+    state.collapsed = value
+    localStorage.setItem('config/collapsed', JSON.stringify(state.collapsed))
   }
 }
 

@@ -6,7 +6,7 @@
     :selectedKeys="selectedKeys"
     @openChange="openChange"
     @select="selectChange"
-    :inline-collapsed="isExpand"
+    :inline-collapsed="collapsed"
   >
     <template v-for="menuInfo in authMenusList">
       <sub-menu
@@ -38,7 +38,7 @@ export default {
       'currentComponent',
       'openKeys',
       'selectedKeys',
-      'isExpand'
+      'collapsed'
     ])
   },
   methods: {

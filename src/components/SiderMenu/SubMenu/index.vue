@@ -2,7 +2,6 @@
   <a-sub-menu :key="props.mode.menuId">
     <span slot="title">
       <IconFont :icon="props.mode.icon"/>
-      <!-- <a-icon type="home"/> -->
       <span>{{ props.mode.menuName }}</span>
     </span>
     <template v-for="menu in props.mode.children">
