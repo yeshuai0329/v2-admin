@@ -6,7 +6,7 @@
         :columns="accountColumns"
         :data-source="dataSource"
       />
-      <a-button @click="viewAccountDetail">查看账号详情</a-button>
+      <a-button type="primary" @click="viewAccountDetail">查看账号详情</a-button>
     </div>
     <router-view v-else></router-view>
   </div>

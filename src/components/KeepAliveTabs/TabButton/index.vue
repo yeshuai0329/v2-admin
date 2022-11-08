@@ -63,7 +63,7 @@ export default {
   flex-shrink: 0;
 }
 .active-button {
-  background-color: rgb(64, 158, 255);
+  background-color: var(--primary-color);
   color: #fff;
 }
 .active-button::before {

@@ -13,6 +13,13 @@
 </head>
 
 <body>
+  <link rel="stylesheet/less" type="text/css" href="/color.less" />
+  <script>
+    window.less = {
+      async: false,
+      env: 'development'//production  development
+    };
+  </script>
   <div id="app" style="height: 100%;">
 
     <style>
@@ -190,6 +197,7 @@
       </div>
     </div>
   </div>
+  <script src="https://cdn.bootcss.com/less.js/2.7.3/less.min.js"></script>
 </body>
 
 </html>

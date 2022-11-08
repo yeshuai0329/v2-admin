@@ -8,6 +8,7 @@
       </a-layout>
       <LayoutContent class="layout-right-content"/>
     </a-layout>
+    <DrawerConfig/>
   </a-layout>
 </template>
 
@@ -16,6 +17,7 @@ import LayoutHeader from '@/layouts/LayoutHeader'
 import LayoutSider from '@/layouts/LayoutSider'
 import LayoutContent from '@/layouts/LayoutContent'
 import KeepAliveTabs from '@/components/KeepAliveTabs'
+import DrawerConfig from './components/DrawerConfig'
 
 export default {
   name: 'DefaultLayout',
@@ -23,7 +25,8 @@ export default {
     LayoutHeader,
     LayoutSider,
     LayoutContent,
-    KeepAliveTabs
+    KeepAliveTabs,
+    DrawerConfig
   }
 }
 </script>

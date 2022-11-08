@@ -10,7 +10,8 @@ const state = {
   openKeys: JSON.parse(localStorage.getItem('config/openKeys') || '[]'),
   selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '[]'),
   breadCrumdList: [],
-  collapsed: JSON.parse(localStorage.getItem('config/collapsed') || 'true')
+  collapsed: JSON.parse(localStorage.getItem('config/collapsed') || 'false'),
+  themeColor: JSON.parse(localStorage.getItem('config/themeColor')) || { name: '佛晓蓝(默认)', color: '#1890FF', checkIsShow: true, loading: false }
 }
 
 const getters = {
@@ -55,6 +56,10 @@ const actions = {
   // 设置菜单展开关闭
   setCollapsedAction (context, value) {
     context.commit('setCollapsedMutation', value)
+  },
+  // 设置主题色
+  setThemeColorAction (context, obj) {
+    context.commit('setThemeColorMutation', obj)
   }
 }
 
@@ -112,6 +117,11 @@ const mutations = {
   setCollapsedMutation (state, value) {
     state.collapsed = value
     localStorage.setItem('config/collapsed', JSON.stringify(state.collapsed))
+  },
+  // 设置主题色
+  setThemeColorMutation (context, obj) {
+    state.themeColor = obj
+    localStorage.setItem('config/themeColor', JSON.stringify(state.themeColor))
   }
 }
 

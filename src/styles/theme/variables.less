@@ -1,0 +1,11 @@
+@import "~/ant-design-vue/lib/style/themes/default.less";
+
+@primary-color: #1890ff;
+
+:root {
+  --primary-color: @primary-color; //color.less中加入css原生变量：--PC
+}
+
+.primary-color {
+  color: @primary-color
+}
