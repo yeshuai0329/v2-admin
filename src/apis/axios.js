@@ -27,7 +27,6 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use((response) => {
   // 统一拦截错误码
   if (response.status === 200 && response.data) {
-    console.log('response', response)
     // 刷新token的有效期
     const token = response.headers.token
     const refreshtoken = response.headers.refreshtoken

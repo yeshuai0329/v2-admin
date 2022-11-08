@@ -1,16 +1,24 @@
 <template>
-  <a-menu mode="inline" theme="dark" :openKeys="openKeys" :selectedKeys="selectedKeys" @openChange="openChange" @select="selectChange">
+  <a-menu
+    mode="inline"
+    theme="light"
+    :openKeys="openKeys"
+    :selectedKeys="selectedKeys"
+    @openChange="openChange"
+    @select="selectChange"
+    :inline-collapsed="isExpand"
+  >
     <template v-for="menuInfo in authMenusList">
       <sub-menu
         v-if="menuInfo.children && menuInfo.children.length > 0"
         :mode="menuInfo"
         :key="menuInfo.menuId"
         :click-menu="clickMenu"
-      >
-      </sub-menu>
+      />
 
       <a-menu-item v-else :key="menuInfo.menuId" @click="clickMenu(menuInfo)">
-        {{ menuInfo.menuName }}
+        <IconFont :icon="menuInfo.icon"/>
+        <span>{{ menuInfo.menuName }}</span>
       </a-menu-item>
     </template>
   </a-menu>
@@ -26,7 +34,12 @@ export default {
   },
   computed: {
     ...mapState('user', ['authMenusList']),
-    ...mapState('config', ['currentComponent', 'openKeys', 'selectedKeys'])
+    ...mapState('config', [
+      'currentComponent',
+      'openKeys',
+      'selectedKeys',
+      'isExpand'
+    ])
   },
   methods: {
     ...mapActions('config', [
@@ -49,3 +62,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+  .ant-menu {
+    height: 100%;
+  }
+</style>

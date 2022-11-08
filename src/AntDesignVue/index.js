@@ -1,6 +1,7 @@
 // 自定义全局组件
 import BaseTable from '@/components/BaseTable'
 import BaseSearchForm from '@/components/BaseSearchForm'
+import IconFont from '@/components/IconFont'
 import SlideVerify from 'vue-monoplasty-slide-verify'
 
 // antd 组件
@@ -25,7 +26,8 @@ const globalComponents = [
 // 自定义全局组件
 const customComponents = [
   BaseTable,
-  BaseSearchForm
+  BaseSearchForm,
+  IconFont
 ]
 
 export default (Vue) => {

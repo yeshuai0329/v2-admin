@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="layout-left">
+  <a-layout class="layout">
     <LayoutSider />
     <a-layout class="layout-right">
       <LayoutHeader class="layout-right-header"/>
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .layout-left {
+  .layout {
     height: 100%;
     .layout-right{
       height: 100%;

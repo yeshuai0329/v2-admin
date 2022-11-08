@@ -1,7 +1,8 @@
 <template>
   <a-layout-header class="LayoutHeader">
     <div class="LayoutHeader-left">
-      <BreadCrumb/>
+      <ToggleButton/>
+      <BreadCrumb :breadCrumdList="breadCrumdList"/>
     </div>
     <div class="LayoutHeader-right">
       <a-space>
@@ -18,20 +19,28 @@ import FullScreen from './components/FullScreen'
 import PersonHead from './components/PersonHead'
 import NoticeCenter from './components/NoticeCenter'
 import BreadCrumb from './components/BreadCrumb'
+import ToggleButton from './components/ToggleButton'
+
+import { mapState } from 'vuex'
+
 export default {
   name: 'LayoutHeader',
   components: {
     FullScreen,
     PersonHead,
     NoticeCenter,
-    BreadCrumb
+    BreadCrumb,
+    ToggleButton
+  },
+  computed: {
+    ...mapState('config', ['breadCrumdList'])
   }
 }
 </script>
 
 <style lang='less' scoped>
 .ant-layout-header {
-  padding: 0 24px;
+  padding: 0 12px;
 }
 .LayoutHeader {
   background-color: #fff;

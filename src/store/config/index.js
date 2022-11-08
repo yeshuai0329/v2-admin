@@ -9,7 +9,8 @@ const state = {
   keepAliveList: JSON.parse(localStorage.getItem('config/keepAliveList') || '[]'),
   openKeys: JSON.parse(localStorage.getItem('config/openKeys') || '[]'),
   selectedKeys: JSON.parse(localStorage.getItem('config/selectedKeys') || '[]'),
-  breadCrumdList: []
+  breadCrumdList: [],
+  isExpand: JSON.parse(localStorage.getItem('config/isExpand') || 'true')
 }
 
 const getters = {
@@ -50,6 +51,10 @@ const actions = {
   // 设置面包屑
   setBreadCrumdListAction (context, breadCrumdList) {
     context.commit('setBreadCrumdListMutation', breadCrumdList)
+  },
+  // 设置菜单展开关闭
+  setIsExpandAction (context, value) {
+    context.commit('setIsExpandMutation', value)
   }
 }
 
@@ -102,6 +107,11 @@ const mutations = {
   // 设置面包屑
   setBreadCrumdListMutation (state, breadCrumdList) {
     state.breadCrumdList = breadCrumdList
+  },
+  // 设置面包屑
+  setIsExpandMutation (state, value) {
+    state.isExpand = value
+    localStorage.setItem('config/isExpand', JSON.stringify(state.isExpand))
   }
 }
 
