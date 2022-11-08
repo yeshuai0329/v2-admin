@@ -59,8 +59,8 @@
     </div>
     <a-divider />
     <template #handle>
-      <div class="toggleButton" @click="toggleButton">
-        <a-icon v-if="!visible" type="setting" />
+      <div id='drageToggleButton' class="toggleButton" @click="toggleButton" @mousedown="mouseDownHandler($event)">
+        <a-icon v-if="!visible" type="setting" @mousedown="mouseDownHandler($event)"/>
         <a-icon v-else type="close" />
       </div>
     </template>
@@ -139,6 +139,23 @@ export default {
             item.checkIsShow = true
           }, 300)
         })
+    },
+    mouseDownHandler (event) {
+      const dom = document.getElementById('drageToggleButton')
+      const diffY = event.clientY - dom.offsetTop
+      document.onmousemove = function (event) {
+        dom.style.top = event.clientY - diffY + 'px'
+        if (event.clientY <= 0) {
+          dom.style.top = 0 + 'px'
+        }
+        if (event.clientY >= window.innerHeight - 48) {
+          dom.style.top = window.innerHeight - 48 + 'px'
+        }
+      }
+      document.onmouseup = function () {
+        this.onmousemove = null
+        this.onmouseup = null
+      }
     }
   }
 }
