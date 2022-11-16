@@ -46,16 +46,16 @@ export default {
 </script>
 
 <style lang='less' scoped>
-  .FullScreen {
-    width: 32px;
-    height: 64px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    cursor: pointer;
-    &:hover {
-      background: aliceblue;
-    }
+.FullScreen {
+  width: 32px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.025);
   }
+}
 </style>

@@ -2,7 +2,6 @@
   <div class="NoticeCenter">
     <a-popover
       placement="bottomLeft"
-      trigger="click"
       :getPopupContainer="(triggerNode) => triggerNode.parentNode"
     >
       <template slot="content">
@@ -132,10 +131,15 @@ export default {
 <style lang='less' scoped>
 .NoticeCenter {
   width: 32px;
-  height: 64px;
-  font-size: 24px;
-  text-align: center;
+  height: 48px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  &:hover {
+    background-color: rgba(0,0,0,.025);
+  }
   :deep(.ant-popover-inner-content) {
     padding: 0px;
   }

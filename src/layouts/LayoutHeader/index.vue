@@ -1,17 +1,21 @@
 <template>
-  <a-layout-header class="LayoutHeader">
+  <div class="LayoutHeader">
     <div class="LayoutHeader-left">
-      <ToggleButton/>
-      <BreadCrumb :breadCrumdList="breadCrumdList"/>
+      <a-space>
+        <Logo />
+        <ToggleButton />
+        <BreadCrumb :breadCrumdList="breadCrumdList" />
+      </a-space>
     </div>
+
     <div class="LayoutHeader-right">
       <a-space>
-        <NoticeCenter/>
+        <NoticeCenter />
         <FullScreen />
         <PersonHead />
       </a-space>
     </div>
-  </a-layout-header>
+  </div>
 </template>
 
 <script>
@@ -20,6 +24,7 @@ import PersonHead from './components/PersonHead'
 import NoticeCenter from './components/NoticeCenter'
 import BreadCrumb from './components/BreadCrumb'
 import ToggleButton from './components/ToggleButton'
+import Logo from '@/components/Logo'
 
 import { mapState } from 'vuex'
 
@@ -30,7 +35,8 @@ export default {
     PersonHead,
     NoticeCenter,
     BreadCrumb,
-    ToggleButton
+    ToggleButton,
+    Logo
   },
   computed: {
     ...mapState('config', ['breadCrumdList'])
@@ -39,17 +45,15 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.ant-layout-header {
-  padding: 0 12px;
-}
 .LayoutHeader {
   background-color: #fff;
   display: flex;
   justify-content: space-between;
+  height: 48px;
   &-left {
     height: 100%;
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
   }
 
   &-right {

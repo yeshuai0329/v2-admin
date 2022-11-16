@@ -1,13 +1,16 @@
 <template>
   <a-layout class="layout">
-    <LayoutSider />
+    <LayoutHeader class="layout-right-header" />
     <a-layout class="layout-right">
-      <LayoutHeader class="layout-right-header"/>
-      <a-layout class="layout-right-tabs">
+      <LayoutSider />
+      <a-layout>
         <keep-alive-tabs />
+        <LayoutContent class="layout-right-content" />
       </a-layout>
-      <LayoutContent class="layout-right-content"/>
     </a-layout>
+    <!-- <a-layout-footer>
+      sadas
+    </a-layout-footer> -->
     <DrawerConfig/>
   </a-layout>
 </template>
@@ -17,7 +20,7 @@ import LayoutHeader from '@/layouts/LayoutHeader'
 import LayoutSider from '@/layouts/LayoutSider'
 import LayoutContent from '@/layouts/LayoutContent'
 import KeepAliveTabs from '@/components/KeepAliveTabs'
-import DrawerConfig from './components/DrawerConfig'
+import DrawerConfig from '@/components/DrawerConfig'
 
 export default {
   name: 'DefaultLayout',
@@ -32,23 +35,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .layout {
+.layout {
+  height: 100%;
+  .layout-right {
     height: 100%;
-    .layout-right{
-      height: 100%;
-      display: flex;
-      &-header {
-        box-shadow:  0 1px 8px #f0f1f2;
-        position: relative;
-        z-index: 100;
-      }
-      &-tabs {
-        min-height: 32px !important;
-        max-height: 32px !important;
-      }
-      &-content {
-        height: calc(100% - 96px);
-      }
+    display: flex;
+    &-header {
+      box-shadow: 0 1px 8px #f0f1f2;
+      position: relative;
+      z-index: 100;
+      height: 48px;
     }
   }
+}
 </style>

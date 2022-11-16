@@ -13,16 +13,17 @@
     <a-space :size="24" direction="vertical" style="width: 100%">
       <h3>主题色设置</h3>
       <a-space align="center">
-        <div
-          class="theme-color-div"
-          :style="{ backgroundColor: item.color }"
-          v-for="item in colors"
-          :key="item.color"
-          @click="clickColor(item)"
-        >
-          <a-icon v-show="item.checkIsShow" type="check" />
-          <a-icon v-show="item.loading" type="sync" spin />
-        </div>
+        <a-tooltip v-for="item in colors" :key="item.color">
+          <template slot="title"> {{item.name}} </template>
+          <div
+            class="theme-color-div"
+            :style="{ backgroundColor: item.color }"
+            @click="clickColor(item)"
+          >
+            <a-icon v-show="item.checkIsShow" type="check" />
+            <a-icon v-show="item.loading" type="sync" spin />
+          </div>
+        </a-tooltip>
       </a-space>
     </a-space>
     <a-divider />
@@ -59,8 +60,17 @@
     </div>
     <a-divider />
     <template #handle>
-      <div id='drageToggleButton' class="toggleButton" @click="toggleButton" @mousedown="mouseDownHandler($event)">
-        <a-icon v-if="!visible" type="setting" @mousedown="mouseDownHandler($event)"/>
+      <div
+        id="drageToggleButton"
+        class="toggleButton"
+        @click="toggleButton"
+        @mousedown="mouseDownHandler($event)"
+      >
+        <a-icon
+          v-if="!visible"
+          type="setting"
+          @mousedown="mouseDownHandler($event)"
+        />
         <a-icon v-else type="close" />
       </div>
     </template>

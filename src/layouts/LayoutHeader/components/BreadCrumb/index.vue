@@ -25,6 +25,7 @@ export default {
 
 <style lang='less' scoped>
 .BreadCrumb{
+  min-width: 48px;
   .breadcrumb-item {
     vertical-align: baseline;
   }

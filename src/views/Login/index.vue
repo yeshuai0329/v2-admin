@@ -6,7 +6,7 @@
           <login-model></login-model>
         </a-col>
         <a-col :span="10">
-          <img src="@/assets/login.jpeg" alt="" class="login-content-center-bgImg">
+          <img :src="loginJpeg" alt="" class="login-content-center-bgImg">
         </a-col>
       </a-row>
     </div>
@@ -15,10 +15,17 @@
 
 <script>
 import LoginModel from '@/views/Login/components/LoginModel'
+import { loginJpeg } from '@/assets/images/index'
+
 export default {
   name: 'Login',
   components: {
     LoginModel
+  },
+  data () {
+    return {
+      loginJpeg
+    }
   }
 }
 </script>

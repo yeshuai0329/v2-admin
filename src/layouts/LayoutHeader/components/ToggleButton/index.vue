@@ -1,6 +1,6 @@
 <template>
   <div class='ToggleButton' >
-    <a-icon :type="collapsed? 'menu-fold':'menu-unfold'" @click="toggleAction"/>
+    <a-icon :type="collapsed? 'menu-unfold':'menu-fold'" @click="toggleAction"/>
   </div>
 </template>
 

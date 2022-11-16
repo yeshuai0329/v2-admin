@@ -27,7 +27,7 @@ export default {
 <style lang='less' scoped>
   .KeepAliveTabs {
     width: 100%;
-    height: 100%;
+    height: 32px;
     display: flex;
     align-items: center;
     overflow-x: scroll;
@@ -36,6 +36,7 @@ export default {
     box-shadow:  0 1px 8px #f0f1f2;
     position: relative;
     z-index: 98;
+    flex-shrink: 0;
     &::-webkit-scrollbar{
       display:none;
     }

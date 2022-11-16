@@ -1,27 +1,39 @@
 <template>
-  <div class='PersonHead' >
+  <div class="PersonHead">
     <a-dropdown>
-    <a-avatar shape="square" :size="48" icon="user" />
-    <a-menu slot="overlay">
-      <a-menu-item @click="toPersonCenter">
-        <a-icon type="user" />
-        个人中心
-      </a-menu-item>
-      <a-menu-item @click="logout">
-        <a-icon type="poweroff" />
-        退出登录
-      </a-menu-item>
-    </a-menu>
-  </a-dropdown>
+      <a-space>
+        <a-avatar :src="defaultHeadeJpg" shape="square" :size="32"  />
+        <div class="PersonHead-nickName one-ellipsis">
+          {{ userInfo.nickName }}
+        </div>
+      </a-space>
+
+      <a-menu slot="overlay">
+        <a-menu-item @click="toPersonCenter">
+          <a-icon type="user" />
+          个人中心
+        </a-menu-item>
+        <a-menu-item @click="logout">
+          <a-icon type="poweroff" />
+          退出登录
+        </a-menu-item>
+      </a-menu>
+    </a-dropdown>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import { defaultHeadeJpg } from '@/assets/images/index'
 export default {
   name: 'PersonHead',
   computed: {
-    ...mapState('user', ['authRoutesList'])
+    ...mapState('user', ['authRoutesList', 'userInfo'])
+  },
+  data () {
+    return {
+      defaultHeadeJpg
+    }
   },
   methods: {
     ...mapActions('config', ['setCurrentComponentAction']),
@@ -39,10 +51,15 @@ export default {
 
 <style lang='less' scoped>
 .PersonHead {
-  width:48px;
-  height: 64px;
+  height: 48px;
+  padding: 0px 8px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  &:hover {
+    background-color: rgba(0,0,0,.025);
+  }
+  &-nickName {
+    max-width: 100px;
+  }
 }
 </style>
