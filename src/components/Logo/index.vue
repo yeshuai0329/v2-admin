@@ -1,7 +1,7 @@
 <template>
-  <div class='Logo' >
+  <div :class="['Logo', { 'Logo-collapsed': collapsed}]" >
     <img :src="vueLogoPng" alt="">
-    <div>
+    <div v-if="!collapsed">
       {{ 'v2-antdv-admin' }}
     </div>
   </div>
@@ -9,12 +9,17 @@
 
 <script>
 import { vueLogoPng } from '@/assets/images/index'
+import { mapState } from 'vuex'
+
 export default {
   name: 'Logo',
   data () {
     return {
       vueLogoPng
     }
+  },
+  computed: {
+    ...mapState('config', ['collapsed'])
   }
 }
 </script>
@@ -22,7 +27,8 @@ export default {
 <style lang='less' scoped>
 .Logo {
   width: 200px;
-  padding: 0 12px;
+  height: 48px;
+  padding: 0 16px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -30,5 +36,9 @@ export default {
     width: 32px;
     height: 32px;
   }
+}
+
+.Logo-collapsed {
+  width: 80px;
 }
 </style>

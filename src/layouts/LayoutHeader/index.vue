@@ -2,7 +2,6 @@
   <div class="LayoutHeader">
     <div class="LayoutHeader-left">
       <a-space>
-        <Logo />
         <ToggleButton />
         <BreadCrumb :breadCrumdList="breadCrumdList" />
       </a-space>
@@ -24,7 +23,6 @@ import PersonHead from './components/PersonHead'
 import NoticeCenter from './components/NoticeCenter'
 import BreadCrumb from './components/BreadCrumb'
 import ToggleButton from './components/ToggleButton'
-import Logo from '@/components/Logo'
 
 import { mapState } from 'vuex'
 
@@ -35,8 +33,7 @@ export default {
     PersonHead,
     NoticeCenter,
     BreadCrumb,
-    ToggleButton,
-    Logo
+    ToggleButton
   },
   computed: {
     ...mapState('config', ['breadCrumdList'])
@@ -49,6 +46,7 @@ export default {
   background-color: #fff;
   display: flex;
   justify-content: space-between;
+  padding: 0px 16px;
   height: 48px;
   &-left {
     height: 100%;

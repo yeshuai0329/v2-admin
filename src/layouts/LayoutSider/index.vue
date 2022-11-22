@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider :collapsed="collapsed" theme="light" collapsible  @collapse="toggleAction">
+  <a-layout-sider :collapsed="collapsed" theme="light"  @collapse="toggleAction">
     <sider-menu/>
   </a-layout-sider>
 </template>

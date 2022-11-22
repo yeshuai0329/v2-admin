@@ -8,6 +8,7 @@
     @select="selectChange"
     :inline-collapsed="collapsed"
   >
+    <Logo />
     <template v-for="menuInfo in authMenusList">
       <sub-menu
         v-if="menuInfo.children && menuInfo.children.length > 0"
@@ -27,10 +28,13 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import SubMenu from './SubMenu'
+import Logo from '@/components/Logo'
+
 export default {
   name: 'SiderMenu',
   components: {
-    SubMenu
+    SubMenu,
+    Logo
   },
   computed: {
     ...mapState('user', ['authMenusList']),

@@ -1,8 +1,8 @@
 <template>
   <a-layout class="layout">
-    <LayoutHeader class="layout-right-header" />
+    <LayoutSider />
     <a-layout class="layout-right">
-      <LayoutSider />
+      <LayoutHeader class="layout-right-header" />
       <a-layout>
         <keep-alive-tabs />
         <LayoutContent class="layout-right-content" />
@@ -11,7 +11,7 @@
     <!-- <a-layout-footer>
       sadas
     </a-layout-footer> -->
-    <DrawerConfig/>
+    <DrawerConfig />
   </a-layout>
 </template>
 

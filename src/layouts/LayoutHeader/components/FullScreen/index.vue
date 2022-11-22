@@ -1,11 +1,7 @@
 <template>
-  <div class="FullScreen">
-    <a-icon v-show="!isFullScreen" type="fullscreen" @click="fullScreen" />
-    <a-icon
-      v-show="isFullScreen"
-      type="fullscreen-exit"
-      @click="fullScreenExit"
-    />
+  <div class="FullScreen" @click="clickIcon">
+    <a-icon v-show="!isFullScreen" type="fullscreen" />
+    <a-icon v-show="isFullScreen" type="fullscreen-exit" />
   </div>
 </template>
 
@@ -17,7 +13,39 @@ export default {
       isFullScreen: false
     }
   },
+  mounted () {
+    const self = this
+    window.onresize = function () {
+      if (!self.checkFull()) {
+        // 退出全屏后要执行的动作
+        self.isFullScreen = false
+      }
+    }
+  },
   methods: {
+    checkFull () {
+      // 判断浏览器是否处于全屏状态 （需要考虑兼容问题）
+      // 火狐浏览器
+      var isFull =
+        document.mozFullScreen ||
+        document.fullScreen ||
+        // 谷歌浏览器及Webkit内核浏览器
+        document.webkitIsFullScreen ||
+        document.webkitRequestFullScreen ||
+        document.mozRequestFullScreen ||
+        document.msFullscreenEnabled
+      if (isFull === undefined) {
+        isFull = false
+      }
+      return isFull
+    },
+    clickIcon () {
+      if (this.isFullScreen) {
+        this.fullScreenExit()
+      } else {
+        this.fullScreen()
+      }
+    },
     fullScreen () {
       const element = document.body
       if (element.requestFullscreen) {

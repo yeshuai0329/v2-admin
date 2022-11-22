@@ -18,4 +18,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.iconfont {
+  font-size: 14px;
+}
 </style>

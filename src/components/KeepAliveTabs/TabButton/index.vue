@@ -6,6 +6,7 @@
     ]"
     @click="toggleComponent(mode)"
   >
+    <IconFont :icon="mode.icon"/>
     {{ mode.menuName }}
     <a-icon
       v-if="mode.name !== 'Home'"
@@ -74,7 +75,7 @@ export default {
   height: 8px;
   border-radius: 50%;
   position: relative;
-  margin-right: 2px;
+  margin-right: 8px;
 }
 
 .TabButton-icon {
