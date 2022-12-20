@@ -16,14 +16,15 @@ router.beforeEach((to, from, next) => {
     if (!token) {
       next('/login')
     } else {
-      const authRoutesList = JSON.parse(localStorage.getItem('authRoutesList'))
-      if (!authRoutesList) next('/login')
-      const route = authRoutesList.find(item => item.fullPath === to.fullPath)
-      if (route || ['/404', '/500'].includes(to.fullPath)) {
-        next()
-      } else {
-        next('/404')
-      }
+      // const authRoutesList = JSON.parse(localStorage.getItem('authRoutesList'))
+      // if (!authRoutesList) next('/login')
+      // const route = authRoutesList.find(item => item.fullPath === to.fullPath)
+      // if (route || ['/404', '/500'].includes(to.fullPath)) {
+      //   next()
+      // } else {
+      //   next('/404')
+      // }
+      next()
     }
   }
 })

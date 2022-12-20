@@ -1,7 +1,7 @@
 <template>
   <div class="PersonHead">
     <a-dropdown>
-      <a-space>
+      <a-space class='PersonHead-content'>
         <a-avatar :src="defaultHeadeJpg" shape="square" :size="32"  />
         <div class="PersonHead-nickName one-ellipsis">
           {{ userInfo.nickName }}
@@ -60,6 +60,9 @@ export default {
   }
   &-nickName {
     max-width: 100px;
+  }
+  &-content {
+    height: 100%;
   }
 }
 </style>

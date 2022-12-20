@@ -2,7 +2,7 @@
  * @description:  保存用户信息相关状态
  */
 const state = {
-  userInfo: {},
+  userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
   authRoutesList: JSON.parse(localStorage.getItem('authRoutesList')) || [],
   authMenusList: JSON.parse(localStorage.getItem('authMenusList')) || []
 }
@@ -32,6 +32,7 @@ const mutations = {
   // 设置用户信息
   userInfoMutation (state, value) {
     state.userInfo = value
+    localStorage.setItem('userInfo', JSON.stringify(value))
   },
   // 设置用户信息路由信息
   authRoutesListMutation (state, value) {

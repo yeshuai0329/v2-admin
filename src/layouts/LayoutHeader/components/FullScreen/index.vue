@@ -75,7 +75,7 @@ export default {
 
 <style lang='less' scoped>
 .FullScreen {
-  width: 32px;
+  width: 48px;
   height: 48px;
   display: flex;
   justify-content: center;

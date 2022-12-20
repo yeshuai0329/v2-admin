@@ -57,9 +57,11 @@
         </div>
       </template>
 
-      <a-badge :count="889" class="NoticeCenter-Badge">
-        <a-icon type="bell" />
-      </a-badge>
+      <div class="NoticeCenter-wapper">
+        <a-badge :count="99" class="NoticeCenter-wapper-Badge">
+          <a-icon type="bell" />
+        </a-badge>
+      </div>
     </a-popover>
   </div>
 </template>
@@ -130,9 +132,8 @@ export default {
 
 <style lang='less' scoped>
 .NoticeCenter {
-  width: 32px;
+  width: 48px;
   height: 48px;
-  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,9 +157,7 @@ export default {
       overflow-y: auto;
     }
   }
-  &-Badge {
-    font-size: 24px;
-  }
+
   &-footer {
     width: 100%;
     height: 48px;
@@ -175,6 +174,17 @@ export default {
     }
     & > span:nth-child(1) {
       border-right: 1px solid #ccc;
+    }
+  }
+  &-wapper {
+    width: 24px;
+    height: 100%;
+    line-height: 48px;
+    &-Badge {
+      font-size: 24px;
+      :deep(.ant-badge-count) {
+
+      }
     }
   }
 }

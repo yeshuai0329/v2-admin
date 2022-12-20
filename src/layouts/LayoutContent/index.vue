@@ -21,7 +21,7 @@ export default {
 <style lang='less' scoped>
 .LayoutContent {
   background: #FFF;
-  padding: 24px;
+  padding: 16px;
   overflow: scroll;
 }
 /* 进入的起点  */

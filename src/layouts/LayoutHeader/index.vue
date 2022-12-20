@@ -8,11 +8,9 @@
     </div>
 
     <div class="LayoutHeader-right">
-      <a-space>
-        <NoticeCenter />
-        <FullScreen />
-        <PersonHead />
-      </a-space>
+      <NoticeCenter />
+      <FullScreen />
+      <PersonHead />
     </div>
   </div>
 </template>
@@ -56,6 +54,8 @@ export default {
 
   &-right {
     height: 100%;
+    display: flex;
+    align-items: center;
   }
 }
 </style>

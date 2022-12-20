@@ -8,7 +8,7 @@ import SlideVerify from 'vue-monoplasty-slide-verify'
 import {
   Button, Input, message, Modal, ConfigProvider, Layout, Menu,
   Row, Col, Tabs, Form, FormModel, Icon, Progress, Table, Space,
-  Avatar, Dropdown, Popover, Badge, Divider, Empty, Breadcrumb, Drawer, Switch, Tooltip
+  Avatar, Dropdown, Popover, Badge, Divider, Empty, Breadcrumb, Drawer, Switch, Tooltip, Spin
 } from 'ant-design-vue'
 const { Sider, Header, Content, Footer } = Layout
 const { SubMenu, Item, ItemGroup } = Menu
@@ -20,7 +20,7 @@ const globalComponents = [
   Button, Input, ConfigProvider, Layout, Sider, Header, Content, Footer, Menu,
   SubMenu, Item, ItemGroup, Row, Col, Tabs, TabPane, Form, FormModel,
   Password, Icon, Progress, Table, Form, Space, Avatar, Dropdown, Popover,
-  Badge, Divider, Empty, Drawer, Switch, Tooltip
+  Badge, Divider, Empty, Drawer, Switch, Tooltip, Spin
 ]
 
 // 自定义全局组件
